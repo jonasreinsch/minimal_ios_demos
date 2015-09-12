@@ -1,0 +1,46 @@
+.last_nib_generation_time.txt
+
+.DS_Store
+*.swp
+*~.nib
+
+build/
+adhoc/
+
+# derived data
+*.pbxuser
+*.perspective
+*.perspectivev3
+
+# user specific XCode data
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+
+# don't track generated localized nibs
+*.lproj/*.xib
+# but do track the master language
+!en.lproj/*.xib
+
+# release binaries are managed as a separate repo
+release/
+
+# ignore emacs backup files
+*~
+
+# don't know exactly what this is, but ignore it anyway
+Converter.xcodeproj/jr.mode1v3
+
+
+# ignore latex stuff
+*.log
+*.aux
+*.bak
+
+# ignore R files
+.RData
+.Rhistory
+parsePowerPlugsData
+parseShoeData
+Pods/Pods.xcodeproj/xcuserdata
+build_history
