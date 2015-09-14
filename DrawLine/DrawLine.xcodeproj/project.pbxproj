@@ -12,6 +12,7 @@
 		7ACFA3011BA6F07900CCF469 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ACFA3001BA6F07900CCF469 /* Images.xcassets */; };
 		7ACFA3041BA6F07900CCF469 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ACFA3021BA6F07900CCF469 /* LaunchScreen.xib */; };
 		7ACFA3101BA6F07900CCF469 /* DrawLineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACFA30F1BA6F07900CCF469 /* DrawLineTests.swift */; };
+		7ACFA31A1BA7023700CCF469 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACFA3191BA7023700CCF469 /* LineView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +35,7 @@
 		7ACFA3091BA6F07900CCF469 /* DrawLineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrawLineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ACFA30E1BA6F07900CCF469 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7ACFA30F1BA6F07900CCF469 /* DrawLineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawLineTests.swift; sourceTree = "<group>"; };
+		7ACFA3191BA7023700CCF469 /* LineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 			children = (
 				7ACFA2F91BA6F07900CCF469 /* AppDelegate.swift */,
 				7ACFA2FB1BA6F07900CCF469 /* ViewController.swift */,
+				7ACFA3191BA7023700CCF469 /* LineView.swift */,
 				7ACFA3001BA6F07900CCF469 /* Images.xcassets */,
 				7ACFA3021BA6F07900CCF469 /* LaunchScreen.xib */,
 				7ACFA2F71BA6F07900CCF469 /* Supporting Files */,
@@ -210,6 +213,7 @@
 			files = (
 				7ACFA2FC1BA6F07900CCF469 /* ViewController.swift in Sources */,
 				7ACFA2FA1BA6F07900CCF469 /* AppDelegate.swift in Sources */,
+				7ACFA31A1BA7023700CCF469 /* LineView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

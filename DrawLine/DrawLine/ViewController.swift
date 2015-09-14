@@ -14,8 +14,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        view.backgroundColor = UIColor.darkGrayColor()
-        
+        let l = LineView()
+        l.frame = view.frame
+        view.addSubview(l)
+        l.setNeedsDisplay()
+
         
     }
 
