@@ -7,6 +7,8 @@
 build/
 adhoc/
 
+contents.xcworkspacedata
+
 UserInterfaceState.xcuserstate
 
 xcdebugger
