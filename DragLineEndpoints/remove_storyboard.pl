@@ -7,3 +7,4 @@ while (<$fh>) {
     print
 }
 
+/usr/libexec/PlistBuddy DragLineEndpoints/Info.plist -c "Delete UIMainStoryboardFile"
