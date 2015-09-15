@@ -12,6 +12,8 @@
 		7ACFA2D31BA4C71E00CCF469 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ACFA2D21BA4C71E00CCF469 /* Images.xcassets */; };
 		7ACFA2D61BA4C71E00CCF469 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ACFA2D41BA4C71E00CCF469 /* LaunchScreen.xib */; };
 		7ACFA2E21BA4C71E00CCF469 /* DragDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACFA2E11BA4C71E00CCF469 /* DragDemoTests.swift */; };
+		7ACFA31C1BA71B2500CCF469 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ACFA31B1BA71B2500CCF469 /* AudioToolbox.framework */; };
+		7ACFA34E1BA7657400CCF469 /* Draggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACFA34D1BA7657400CCF469 /* Draggable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,8 @@
 		7ACFA2DB1BA4C71E00CCF469 /* DragDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DragDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ACFA2E01BA4C71E00CCF469 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7ACFA2E11BA4C71E00CCF469 /* DragDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragDemoTests.swift; sourceTree = "<group>"; };
+		7ACFA31B1BA71B2500CCF469 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		7ACFA34D1BA7657400CCF469 /* Draggable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Draggable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7ACFA31C1BA71B2500CCF469 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +62,8 @@
 		7ACFA2BD1BA4C71E00CCF469 = {
 			isa = PBXGroup;
 			children = (
+				7ACFA34D1BA7657400CCF469 /* Draggable.swift */,
+				7ACFA31B1BA71B2500CCF469 /* AudioToolbox.framework */,
 				7ACFA2C81BA4C71E00CCF469 /* DragDemo */,
 				7ACFA2DE1BA4C71E00CCF469 /* DragDemoTests */,
 				7ACFA2C71BA4C71E00CCF469 /* Products */,
@@ -208,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7ACFA34E1BA7657400CCF469 /* Draggable.swift in Sources */,
 				7ACFA2CE1BA4C71E00CCF469 /* ViewController.swift in Sources */,
 				7ACFA2CC1BA4C71E00CCF469 /* AppDelegate.swift in Sources */,
 			);
@@ -397,6 +405,7 @@
 				7ACFA2E71BA4C71E00CCF469 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7ACFA2E81BA4C71E00CCF469 /* Build configuration list for PBXNativeTarget "DragDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -405,6 +414,7 @@
 				7ACFA2EA1BA4C71E00CCF469 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

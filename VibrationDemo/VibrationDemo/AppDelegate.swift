@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  DragDemo
+//  VibrationDemo
 //
-//  Created by Jonas Reinsch on 12.09.15.
+//  Created by Jonas Reinsch on 14.09.15.
 //  Copyright (c) 2015 Jonas Reinsch. All rights reserved.
 //
 
@@ -13,16 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        
-        
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        if let window = window {
-            window.rootViewController = ViewController()
-            window.makeKeyAndVisible()
-        }
-        
         return true
     }
 
