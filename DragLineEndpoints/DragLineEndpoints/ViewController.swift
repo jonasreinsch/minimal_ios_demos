@@ -9,6 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var draggables:[Draggable] = []
+    let connectionView = ConnectionView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -16,18 +19,31 @@ class ViewController: UIViewController {
         
         view.backgroundColor = UIColor.blackColor()
         
-        let connectionView = ConnectionView()
+
         view.addSubview(connectionView)
         connectionView.addLayoutConstraints()
+        
+        makeDraggableAtPoint(CGPointMake(30, 40))
+        makeDraggableAtPoint(CGPointMake(300, 400))
+        connectionView.connections = [(draggables[0], draggables[1])]
+        
+        connectionView.backgroundColor = UIColor.blackColor()
     }
     
     func mainViewTapped(gr:UITapGestureRecognizer) {
         let location = gr.locationInView(self.view)
+        makeDraggableAtPoint(location)
+    }
+    
+    func makeDraggableAtPoint(p:CGPoint) {
         let d = Draggable()
-        d.origin = CGPointMake(location.x-d.width/2.0,
-                               location.y-d.height/2.0)
+        d.connectionView = connectionView
+        d.position = CGPointMake(p.x-d.width/2.0,
+                                 p.y-d.height/2.0)
         view.addSubview(d)
         d.addDraggableConstraints()
+        
+        draggables.append(d)
     }
     
     override func didReceiveMemoryWarning() {

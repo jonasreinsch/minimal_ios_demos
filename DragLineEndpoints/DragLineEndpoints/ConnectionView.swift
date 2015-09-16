@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias Connection = ((CGFloat, CGFloat), (CGFloat, CGFloat))
+typealias Connection = (Draggable, Draggable)
 
 class ConnectionView: UIView {
     var connections:[Connection] = []
@@ -34,8 +34,8 @@ class ConnectionView: UIView {
         CGContextBeginPath(c)
         
         for connection in connections {
-            CGContextMoveToPoint(c, connection.0.0, connection.0.1)
-            CGContextAddLineToPoint(c, connection.1.0, connection.1.1)
+            CGContextMoveToPoint(c, connection.0.position.x+connection.0.width/2, connection.0.position.y + connection.0.height/2)
+            CGContextAddLineToPoint(c, connection.1.position.x+connection.1.width/2, connection.1.position.y + connection.1.height/2)
             CGContextStrokePath(c)
         }
     }

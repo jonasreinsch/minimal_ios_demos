@@ -13,7 +13,9 @@ class Draggable: UIView {
     var topConstraint:NSLayoutConstraint!
     let width:CGFloat = 40
     let height:CGFloat = 40
-    var origin = CGPointMake(0, 0)
+    var position = CGPointMake(0, 0)
+    var connectionView:ConnectionView?
+    var draggables:[Draggable]?
     
     func addDraggableConstraints() {
         self.backgroundColor = UIColor.redColor()
@@ -21,8 +23,8 @@ class Draggable: UIView {
         
         let widthConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: width)
         let heightConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: height)
-        leftConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: superview!, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: origin.x)
-        topConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: superview!, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: origin.y)
+        leftConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: superview!, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: position.x)
+        topConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: superview!, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: position.y)
         
         self.addConstraint(widthConstraint)
         self.addConstraint(heightConstraint)
@@ -38,12 +40,16 @@ class Draggable: UIView {
     func dragged(gestureRecognizer:UIPanGestureRecognizer) {
         switch gestureRecognizer.state {
         case UIGestureRecognizerState.Began:
-            startPos = CGPointMake(self.leftConstraint.constant,
-                                   self.topConstraint.constant)
+            startPos = CGPointMake(position.x,
+                                   position.y)
         case UIGestureRecognizerState.Changed:
             let translation:CGPoint = gestureRecognizer.translationInView(superview!)
-            self.leftConstraint.constant = translation.x + startPos.x
-            self.topConstraint.constant = translation.y + startPos.y
+            position.x = translation.x + startPos.x
+            position.y = translation.y + startPos.y
+            self.leftConstraint.constant = position.x
+            self.topConstraint.constant = position.y
+            connectionView!.setNeedsDisplay()
+
         case UIGestureRecognizerState.Ended:
             break
         default:
