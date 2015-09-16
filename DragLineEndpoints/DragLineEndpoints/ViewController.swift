@@ -13,6 +13,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "mainViewTapped:"))
+        
+        view.backgroundColor = UIColor.blackColor()
+        
+        view.addSubview(ConnectionView())
     }
     
     func mainViewTapped(gr:UITapGestureRecognizer) {

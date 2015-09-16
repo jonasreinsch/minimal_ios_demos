@@ -13,6 +13,7 @@
 		7ACFA3681BA81E7800CCF469 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ACFA3661BA81E7800CCF469 /* LaunchScreen.xib */; };
 		7ACFA3741BA81E7800CCF469 /* DragLineEndpointsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACFA3731BA81E7800CCF469 /* DragLineEndpointsTests.swift */; };
 		7ACFA3DA1BA8C13900CCF469 /* Draggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACFA3D91BA8C13900CCF469 /* Draggable.swift */; };
+		7ACFA3DC1BA925CA00CCF469 /* ConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACFA3DB1BA925CA00CCF469 /* ConnectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		7ACFA3721BA81E7800CCF469 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7ACFA3731BA81E7800CCF469 /* DragLineEndpointsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragLineEndpointsTests.swift; sourceTree = "<group>"; };
 		7ACFA3D91BA8C13900CCF469 /* Draggable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Draggable.swift; sourceTree = "<group>"; };
+		7ACFA3DB1BA925CA00CCF469 /* ConnectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				7ACFA35D1BA81E7800CCF469 /* AppDelegate.swift */,
 				7ACFA35F1BA81E7800CCF469 /* ViewController.swift */,
 				7ACFA3D91BA8C13900CCF469 /* Draggable.swift */,
+				7ACFA3DB1BA925CA00CCF469 /* ConnectionView.swift */,
 				7ACFA3641BA81E7800CCF469 /* Images.xcassets */,
 				7ACFA3661BA81E7800CCF469 /* LaunchScreen.xib */,
 				7ACFA35B1BA81E7800CCF469 /* Supporting Files */,
@@ -213,6 +216,7 @@
 			files = (
 				7ACFA3DA1BA8C13900CCF469 /* Draggable.swift in Sources */,
 				7ACFA3601BA81E7800CCF469 /* ViewController.swift in Sources */,
+				7ACFA3DC1BA925CA00CCF469 /* ConnectionView.swift in Sources */,
 				7ACFA35E1BA81E7800CCF469 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
