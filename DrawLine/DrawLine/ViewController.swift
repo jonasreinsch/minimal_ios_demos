@@ -17,9 +17,6 @@ class ViewController: UIViewController {
         let l = LineView()
         l.frame = view.frame
         view.addSubview(l)
-        l.setNeedsDisplay()
-
-        
     }
 
     override func didReceiveMemoryWarning() {
