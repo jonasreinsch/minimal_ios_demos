@@ -52,4 +52,20 @@ class ConnectionView: UIView {
         }
         return false
     }
+    
+    func getConnectionIndex(c:Connection) -> Int {
+        for var i=0; i != connections.count; ++i {
+            if c.0 == connections[i].0 {
+                if c.1 == connections[i].1 {
+                    return i
+                }
+            }
+            if c.0 == connections[i].1 {
+                if c.1 == connections[i].0 {
+                    return i
+                }
+            }
+        }
+        return -1
+    }
 }

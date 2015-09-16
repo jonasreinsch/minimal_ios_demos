@@ -19,6 +19,9 @@ class Draggable: UIView {
     
     let overlapTreshold:CGFloat = 1600
     
+    var workingSetConnected:Set<Draggable> = Set([])
+    var workingSetDisconnected:Set<Draggable> = Set([])
+    
     func addDraggableConstraints() {
         self.backgroundColor = UIColor.redColor()
         self.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -42,6 +45,8 @@ class Draggable: UIView {
     func dragged(gestureRecognizer:UIPanGestureRecognizer) {
         switch gestureRecognizer.state {
         case UIGestureRecognizerState.Began:
+            workingSetConnected = Set([])
+            workingSetDisconnected = Set([])
             startPos = CGPointMake(position.x,
                                    position.y)
         case UIGestureRecognizerState.Changed:
@@ -67,11 +72,21 @@ class Draggable: UIView {
             if d != self {
                 if (pow(position.x - d.position.x, 2) + pow(position.y - d.position.y, 2)) < overlapTreshold {
                     if connectionView!.doesConnectionExist(self, d2: d) {
-                        println("already connected")
+                        if workingSetConnected.contains(d) {
+                            continue // if just connected, do not disconnect
+                        }
+                        workingSetDisconnected.insert(d)
+                        connectionView!.connections.removeAtIndex(connectionView!.getConnectionIndex((self, d)))
                     } else {
-                        println("not yet connected")
+                        if workingSetDisconnected.contains(d) {
+                            continue // if just disconnected, do not connect
+                        }
+                        workingSetConnected.insert(d)
                         connectionView!.connections.append((self, d))
                     }
+                } else {
+                    workingSetConnected.remove(d)
+                    workingSetDisconnected.remove(d)
                 }
             }
         }
