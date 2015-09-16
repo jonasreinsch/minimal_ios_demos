@@ -22,10 +22,7 @@ class ConnectionView: UIView {
         superview!.addConstraints(verticalConstraints)
     }
     
-    
     override func drawRect(rect: CGRect) {
-        // Drawing code
-        
         let c = UIGraphicsGetCurrentContext()
         
         CGContextSetLineWidth(c, 2)
@@ -38,5 +35,21 @@ class ConnectionView: UIView {
             CGContextAddLineToPoint(c, connection.1.position.x+connection.1.width/2, connection.1.position.y + connection.1.height/2)
             CGContextStrokePath(c)
         }
+    }
+    
+    func doesConnectionExist(d1:Draggable, d2:Draggable) -> Bool {
+        for connection in connections {
+            if connection.0 == d1 {
+                if connection.1 == d2 {
+                    return true
+                }
+            }
+            if connection.0 == d2 {
+                if connection.1 == d1 {
+                    return true
+                }
+            }
+        }
+        return false
     }
 }

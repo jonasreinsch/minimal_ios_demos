@@ -15,7 +15,9 @@ class Draggable: UIView {
     let height:CGFloat = 40
     var position = CGPointMake(0, 0)
     var connectionView:ConnectionView?
-    var draggables:[Draggable]?
+    var viewController:ViewController?
+    
+    let overlapTreshold:CGFloat = 1600
     
     func addDraggableConstraints() {
         self.backgroundColor = UIColor.redColor()
@@ -49,11 +51,29 @@ class Draggable: UIView {
             self.leftConstraint.constant = position.x
             self.topConstraint.constant = position.y
             connectionView!.setNeedsDisplay()
+            
+            checkOverlap()
 
         case UIGestureRecognizerState.Ended:
             break
         default:
             break
+        }
+    }
+    
+    func checkOverlap() {
+        var x = 0
+        for d in viewController!.draggables {
+            if d != self {
+                if (pow(position.x - d.position.x, 2) + pow(position.y - d.position.y, 2)) < overlapTreshold {
+                    if connectionView!.doesConnectionExist(self, d2: d) {
+                        println("already connected")
+                    } else {
+                        println("not yet connected")
+                        connectionView!.connections.append((self, d))
+                    }
+                }
+            }
         }
     }
 }

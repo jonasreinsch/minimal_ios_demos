@@ -17,16 +17,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "mainViewTapped:"))
         
-        view.backgroundColor = UIColor.blackColor()
-        
-
         view.addSubview(connectionView)
         connectionView.addLayoutConstraints()
-        
-        makeDraggableAtPoint(CGPointMake(30, 40))
-        makeDraggableAtPoint(CGPointMake(300, 400))
-        connectionView.connections = [(draggables[0], draggables[1])]
-        
         connectionView.backgroundColor = UIColor.blackColor()
     }
     
@@ -38,6 +30,7 @@ class ViewController: UIViewController {
     func makeDraggableAtPoint(p:CGPoint) {
         let d = Draggable()
         d.connectionView = connectionView
+        d.viewController = self
         d.position = CGPointMake(p.x-d.width/2.0,
                                  p.y-d.height/2.0)
         view.addSubview(d)
