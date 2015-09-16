@@ -30,6 +30,8 @@ class Draggable: UIView {
         superview!.addConstraint(topConstraint)
         
         self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "dragged:"))
+        
+        self.layer.cornerRadius = width / 2
     }
     
     var startPos = CGPointMake(0, 0)
