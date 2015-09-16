@@ -16,7 +16,9 @@ class ViewController: UIViewController {
         
         view.backgroundColor = UIColor.blackColor()
         
-        view.addSubview(ConnectionView())
+        let connectionView = ConnectionView()
+        view.addSubview(connectionView)
+        connectionView.addLayoutConstraints()
     }
     
     func mainViewTapped(gr:UITapGestureRecognizer) {
