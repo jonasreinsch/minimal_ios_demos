@@ -8,7 +8,11 @@
 
 import UIKit
 
+typealias Connection = ((CGFloat, CGFloat), (CGFloat, CGFloat))
+
 class ConnectionView: UIView {
+    var connections:[Connection] = []
+    
     func addLayoutConstraints() {
         self.setTranslatesAutoresizingMaskIntoConstraints(false)
         let views = ["self": self]
@@ -28,8 +32,11 @@ class ConnectionView: UIView {
         CGContextSetLineCap(c, kCGLineCapRound)
         CGContextSetStrokeColorWithColor(c, UIColor.greenColor().CGColor)
         CGContextBeginPath(c)
-        CGContextMoveToPoint(c, 50, 50)
-        CGContextAddLineToPoint(c, 1000.0, 2000.0)
-        CGContextStrokePath(c)
+        
+        for connection in connections {
+            CGContextMoveToPoint(c, connection.0.0, connection.0.1)
+            CGContextAddLineToPoint(c, connection.1.0, connection.1.1)
+            CGContextStrokePath(c)
+        }
     }
 }
