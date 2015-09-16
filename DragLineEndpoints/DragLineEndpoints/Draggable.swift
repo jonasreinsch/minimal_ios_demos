@@ -37,8 +37,33 @@ class Draggable: UIView {
         superview!.addConstraint(topConstraint)
         
         self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "dragged:"))
+        let lpgr = UILongPressGestureRecognizer(target: self, action: "pressedLong:")
+        lpgr.minimumPressDuration = 0.5
+        self.addGestureRecognizer(lpgr)
         
         self.layer.cornerRadius = width / 2
+    }
+    
+    func pressedLong(gestureRecognizer:UILongPressGestureRecognizer) {
+        switch gestureRecognizer.state {
+        case .Began:
+            self.userInteractionEnabled = false
+            for d in viewController!.draggables {
+                if self != d {
+                    if connectionView!.doesConnectionExist(self, d2: d) {
+                        connectionView!.connections.removeAtIndex(connectionView!.getConnectionIndex((self, d)))
+                    }
+                }
+            }
+        
+            // in swift 2.0, use indexOf instead of find
+            let idx = find(viewController!.draggables, self)!
+            viewController!.draggables.removeAtIndex(idx)
+            self.removeFromSuperview()
+            connectionView!.setNeedsDisplay()
+
+        default: println("default")
+        }
     }
     
     var startPos = CGPointMake(0, 0)
