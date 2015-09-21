@@ -23,8 +23,8 @@ class Draggable: UIView {
     var workingSetDisconnected:Set<Draggable> = Set([])
     
     func addDraggableConstraints() {
-        self.backgroundColor = UIColor.redColor()
-        self.setTranslatesAutoresizingMaskIntoConstraints(false)
+        backgroundColor = UIColor.redColor()
+        translatesAutoresizingMaskIntoConstraints = false
         
         let widthConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: width)
         let heightConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: height)
@@ -56,13 +56,13 @@ class Draggable: UIView {
                 }
             }
         
-            // in swift 2.0, use indexOf instead of find
-            let idx = find(viewController!.draggables, self)!
+            let idx = viewController!.draggables.indexOf(self)!
+
             viewController!.draggables.removeAtIndex(idx)
             self.removeFromSuperview()
             connectionView!.setNeedsDisplay()
 
-        default: println("default")
+        default: break
         }
     }
     
@@ -92,7 +92,6 @@ class Draggable: UIView {
     }
     
     func checkOverlap() {
-        var x = 0
         for d in viewController!.draggables {
             if d != self {
                 if (pow(position.x - d.position.x, 2) + pow(position.y - d.position.y, 2)) < overlapTreshold {
