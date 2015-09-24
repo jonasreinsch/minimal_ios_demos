@@ -9,10 +9,16 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    let rotatingView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        view.backgroundColor = UIColor.blackColor()
+        view.addSubview(rotatingView)
+        rotatingView.backgroundColor = UIColor.orangeColor()
+        rotatingView.frame = CGRectMake(0, 0, 300, 200)
+        rotatingView.center = view.center
     }
 
     override func didReceiveMemoryWarning() {
