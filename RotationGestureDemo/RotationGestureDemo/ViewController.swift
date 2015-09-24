@@ -19,6 +19,13 @@ class ViewController: UIViewController {
         rotatingView.backgroundColor = UIColor.orangeColor()
         rotatingView.frame = CGRectMake(0, 0, 300, 200)
         rotatingView.center = view.center
+        
+        let rotationRecognizer = UIRotationGestureRecognizer(target: self, action: "didRotate:")
+        rotatingView.addGestureRecognizer(rotationRecognizer)
+    }
+    
+    func didRotate(rotationRecognizer:UIRotationGestureRecognizer) {
+        print("rotated")
     }
 
     override func didReceiveMemoryWarning() {
