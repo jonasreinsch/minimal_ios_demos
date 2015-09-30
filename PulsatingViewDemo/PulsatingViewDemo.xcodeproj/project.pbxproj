@@ -11,6 +11,7 @@
 		7A2B56271BBBE75B0091E17A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2B56261BBBE75B0091E17A /* ViewController.swift */; };
 		7A2B562C1BBBE75B0091E17A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A2B562B1BBBE75B0091E17A /* Assets.xcassets */; };
 		7A2B562F1BBBE75B0091E17A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A2B562D1BBBE75B0091E17A /* LaunchScreen.storyboard */; };
+		7A2B56371BBBE7C90091E17A /* PulsatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2B56361BBBE7C90091E17A /* PulsatingView.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		7A2B562B1BBBE75B0091E17A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A2B562E1BBBE75B0091E17A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A2B56301BBBE75B0091E17A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A2B56361BBBE7C90091E17A /* PulsatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulsatingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				7A2B56241BBBE75B0091E17A /* AppDelegate.swift */,
 				7A2B56261BBBE75B0091E17A /* ViewController.swift */,
+				7A2B56361BBBE7C90091E17A /* PulsatingView.swift */,
 				7A2B562B1BBBE75B0091E17A /* Assets.xcassets */,
 				7A2B562D1BBBE75B0091E17A /* LaunchScreen.storyboard */,
 				7A2B56301BBBE75B0091E17A /* Info.plist */,
@@ -130,6 +133,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A2B56371BBBE7C90091E17A /* PulsatingView.swift in Sources */,
 				7A2B56271BBBE75B0091E17A /* ViewController.swift in Sources */,
 				7A2B56251BBBE75B0091E17A /* AppDelegate.swift in Sources */,
 			);
@@ -271,6 +275,7 @@
 				7A2B56351BBBE75B0091E17A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
