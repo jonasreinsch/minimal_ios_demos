@@ -160,6 +160,7 @@
 		7ACFA31E1BA71C9300CCF469 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Jonas Reinsch";
 				TargetAttributes = {
@@ -413,6 +414,7 @@
 				7ACFA3471BA71C9300CCF469 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7ACFA3481BA71C9300CCF469 /* Build configuration list for PBXNativeTarget "VibrationDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +423,7 @@
 				7ACFA34A1BA71C9300CCF469 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
