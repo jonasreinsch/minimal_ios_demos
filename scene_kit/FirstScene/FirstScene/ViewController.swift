@@ -16,27 +16,28 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
+
+        // The scene
         sceneView.scene = scene
         
+        // A square box with sharp counters
         let boxSide:CGFloat = 10
         let box = SCNBox(width: boxSide, height: boxSide, length: boxSide, chamferRadius: 0)
-        
         let boxNode = SCNNode(geometry: box)
+        // rotate the box a bit
         boxNode.rotation = SCNVector4Make(0, 1, 0, Float(M_PI/5))
         scene.rootNode.addChildNode(boxNode)
         
+        // Camera
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         cameraNode.position = SCNVector3Make(0, 10, 20)
         // -atan(camY/camX)
         cameraNode.rotation = SCNVector4Make(1, 0, 0, -atan2f(10, 20))
-        
         scene.rootNode.addChildNode(cameraNode)
         
+        // Light
         let lightBlueColor = UIColor(red: 4/255, green: 120/255, blue: 255/255, alpha: 1).CGColor
-        
         let light = SCNLight()
         light.type = SCNLightTypeDirectional
         light.color = lightBlueColor
@@ -46,7 +47,6 @@ class ViewController: UIViewController {
         cameraNode.addChildNode(lightNode)
         
         sceneView.frame = UIScreen.mainScreen().bounds
-        
         view.addSubview(sceneView)
     }
 
