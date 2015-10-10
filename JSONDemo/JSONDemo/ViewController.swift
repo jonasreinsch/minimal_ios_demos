@@ -12,14 +12,24 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // 1. json data
+        guard let data = "{\"bla\": \"bli\"}".dataUsingEncoding(NSUTF8StringEncoding) else {
+            print("problem with the dta string")
+            return
+        }
+        
+        do {
+            let dict = try NSJSONSerialization.JSONObjectWithData(data, options: []) as! [String:AnyObject]
+            
+            print(dict["bla"])
+        } catch {
+            print("json error: \(error)")
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
-
