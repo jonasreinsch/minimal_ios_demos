@@ -5,6 +5,8 @@
 //  Created by Jonas Reinsch on 09.10.15.
 //  Copyright © 2015 Jonas Reinsch. All rights reserved.
 //
+//  This is a Swift port of the example in David Rönnqvists Book
+//  3D Graphics with Scene Kit
 
 import UIKit
 import SceneKit
