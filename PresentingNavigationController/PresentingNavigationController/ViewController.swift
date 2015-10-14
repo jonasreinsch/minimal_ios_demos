@@ -24,7 +24,6 @@ class ViewController: UIViewController {
         let toPresent = PresentedViewController()
         let navController = UINavigationController(rootViewController: toPresent)
         presentViewController(navController, animated: true, completion: nil)
-        
     }
 
     override func didReceiveMemoryWarning() {
