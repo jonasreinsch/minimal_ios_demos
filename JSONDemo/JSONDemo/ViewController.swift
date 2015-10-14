@@ -8,23 +8,41 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+func jsonFromString(s:String) -> [String:String] {
+    guard let data = s.dataUsingEncoding(NSUTF8StringEncoding) else {
+        print("problem with the data string: \(s)")
+        return [:]
+    }
+    
+    do {
+        let dict = try NSJSONSerialization.JSONObjectWithData(data, options: []) as! [String:String]
+        return dict
+    } catch {
+        print("json error: \(error)")
+    }
+    
+    return [:]
+}
 
+class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 1. json data
-        guard let data = "{\"bla\": \"bli\"}".dataUsingEncoding(NSUTF8StringEncoding) else {
-            print("problem with the dta string")
-            return
-        }
+        // 1. from string literal
+        let dict = jsonFromString("{\"key\": \"value\"}")
+        print(dict["key"])
         
-        do {
-            let dict = try NSJSONSerialization.JSONObjectWithData(data, options: []) as! [String:AnyObject]
+        // 2. from resource file
+        if let path = NSBundle.mainBundle().pathForResource("test", ofType: "json") {
             
-            print(dict["bla"])
-        } catch {
-            print("json error: \(error)")
+            do {
+                let jsonString = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+                
+                print(jsonFromString(jsonString as String)["key"])
+            }
+            catch {
+                print(error)
+            }
         }
     }
 
