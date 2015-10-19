@@ -153,6 +153,8 @@
 		7ACFA2601BA1717800CCF469 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Jonas Reinsch";
 				TargetAttributes = {
@@ -397,6 +399,7 @@
 				7ACFA2891BA1717800CCF469 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7ACFA28A1BA1717800CCF469 /* Build configuration list for PBXNativeTarget "ImagePickerDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -405,6 +408,7 @@
 				7ACFA28C1BA1717800CCF469 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

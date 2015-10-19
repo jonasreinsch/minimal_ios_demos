@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     let imagePicker = UIImagePickerController()
     let imageView = UIImageView()
-    let loadImageButton = UIButton.buttonWithType(.Custom) as! UIButton
+    let loadImageButton = UIButton(type: .Custom)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +22,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let views = ["loadImageButton": loadImageButton, "imageView":imageView]
         
         
-        imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
         
-        let horizontalConstraintsImageView = NSLayoutConstraint.constraintsWithVisualFormat("H:|[imageView]|", options: .allZeros, metrics: nil, views: views)
-        let verticalConstraintsImageView = NSLayoutConstraint.constraintsWithVisualFormat("V:|[imageView]|", options: .allZeros, metrics: nil, views: views)
+        let horizontalConstraintsImageView = NSLayoutConstraint.constraintsWithVisualFormat("H:|[imageView]|", options: [], metrics: nil, views: views)
+        let verticalConstraintsImageView = NSLayoutConstraint.constraintsWithVisualFormat("V:|[imageView]|", options: [], metrics: nil, views: views)
         
         view.addConstraints(horizontalConstraintsImageView)
         view.addConstraints(verticalConstraintsImageView)
@@ -35,7 +35,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         
         
-        loadImageButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+        loadImageButton.translatesAutoresizingMaskIntoConstraints = false
         loadImageButton.setTitle("Load Image", forState: .Normal)
         loadImageButton.setTitleColor(UIColor.orangeColor(), forState: .Normal)
         loadImageButton.addTarget(self, action: "loadImageButtonTapped", forControlEvents: .TouchUpInside)
@@ -43,8 +43,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         view.backgroundColor = UIColor.whiteColor()
         
 
-        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:[loadImageButton]-|", options: .allZeros, metrics: nil, views: views)
-        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[loadImageButton]-|", options: .allZeros, metrics: nil, views: views)
+        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:[loadImageButton]-|", options: [], metrics: nil, views: views)
+        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[loadImageButton]-|", options: [], metrics: nil, views: views)
         
         view.addConstraints(horizontalConstraints)
         view.addConstraints(verticalConstraints)
