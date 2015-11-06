@@ -55,7 +55,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.sourceType = .PhotoLibrary
         presentViewController(imagePicker, animated: true, completion: nil)
     }
-
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
