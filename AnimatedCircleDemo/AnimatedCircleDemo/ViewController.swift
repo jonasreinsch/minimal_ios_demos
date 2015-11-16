@@ -64,8 +64,6 @@ class ViewController: UIViewController {
         view.addConstraint(centerXConstraint)
         
         slider.addTarget(self, action: "sliderChanged:", forControlEvents: .ValueChanged)
-        
-
     }
     
     func sliderChanged(slider:UISlider) {
