@@ -21,8 +21,6 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         super.viewDidLoad()
         
         let captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-        
-        // Get an instance of the AVCaptureDeviceInput class using the previous device object.
         do {
             let input = try AVCaptureDeviceInput(device: captureDevice)
             let captureMetadataOutput = AVCaptureMetadataOutput()
@@ -90,7 +88,6 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
                 messageLabel.text = metadataObj.stringValue
             }
         }
-        
     }
     
     override func viewDidLayoutSubviews() {
