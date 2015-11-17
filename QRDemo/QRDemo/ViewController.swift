@@ -9,6 +9,8 @@
 import UIKit
 import AVFoundation
 
+// code based on http://www.appcoda.com/qr-code-reader-swift/
+// adapted for Swift 2.0
 class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     var captureSession = AVCaptureSession()
