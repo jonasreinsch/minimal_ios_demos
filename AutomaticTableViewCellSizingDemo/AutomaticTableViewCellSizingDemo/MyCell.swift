@@ -23,6 +23,11 @@ class MyCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func configure(s:String) {
+        myLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        myLabel.text = s
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
