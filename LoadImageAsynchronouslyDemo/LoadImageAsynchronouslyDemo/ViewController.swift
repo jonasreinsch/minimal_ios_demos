@@ -9,6 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    let activityIndicator = UIActivityIndicatorView()
+    
     func imageDownloadCompletionHandler(data:NSData?, response:NSURLResponse?, error:NSError?) {
         guard let data = data else {
             print("no data in response")
@@ -20,6 +22,7 @@ class ViewController: UIViewController {
         }
         
         dispatch_async(dispatch_get_main_queue()) {
+            self.activityIndicator.stopAnimating()
             let imageView = UIImageView(image: image)
             self.view.addSubview(imageView)
             imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -36,9 +39,19 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.blackColor()
         
-        let urlString = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Schloss_Neuschwanstein_2013.jpg/1200px-Schloss_Neuschwanstein_2013.jpg"
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(activityIndicator)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        let centerXConstraint = NSLayoutConstraint(item: activityIndicator, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1, constant: 0)
+        let centerYConstraint = NSLayoutConstraint(item: activityIndicator, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: 0)
+        view.addConstraint(centerXConstraint)
+        view.addConstraint(centerYConstraint)
         
+        let urlString = "https://upload.wikimedia.org/wikipedia/commons/f/f8/Schloss_Neuschwanstein_2013.jpg"
+
         guard let url = NSURL(string: urlString) else {
             print("invalid url string")
             return
