@@ -23,6 +23,11 @@ class MyCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    // for dynamic type support, it is important that
+    // the font is set each time cellForRowAtIndexPath gets called.
+    // So we call this function from there. No explicit listening
+    // to a change of the preferred font size is necessary, the system
+    // will take care of the rest)
     func configure(s:String) {
         myLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         myLabel.text = s
