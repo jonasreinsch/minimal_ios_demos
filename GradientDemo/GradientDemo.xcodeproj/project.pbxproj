@@ -12,6 +12,7 @@
 		7AE0F22A1C032EF7005FB11B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AE0F2291C032EF7005FB11B /* Assets.xcassets */; };
 		7AE0F22D1C032EF7005FB11B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AE0F22B1C032EF7005FB11B /* LaunchScreen.storyboard */; };
 		7AE0F2351C032FEE005FB11B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE0F2341C032FEE005FB11B /* GradientView.swift */; };
+		7AE0F2381C0347EB005FB11B /* moscow_city.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE0F2371C0347EB005FB11B /* moscow_city.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		7AE0F22C1C032EF7005FB11B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7AE0F22E1C032EF7005FB11B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AE0F2341C032FEE005FB11B /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		7AE0F2371C0347EB005FB11B /* moscow_city.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = moscow_city.jpg; path = img/moscow_city.jpg; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 		7AE0F2361C03352F005FB11B /* img */ = {
 			isa = PBXGroup;
 			children = (
+				7AE0F2371C0347EB005FB11B /* moscow_city.jpg */,
 			);
 			name = img;
 			sourceTree = "<group>";
@@ -132,6 +135,7 @@
 			files = (
 				7AE0F22D1C032EF7005FB11B /* LaunchScreen.storyboard in Resources */,
 				7AE0F22A1C032EF7005FB11B /* Assets.xcassets in Resources */,
+				7AE0F2381C0347EB005FB11B /* moscow_city.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
