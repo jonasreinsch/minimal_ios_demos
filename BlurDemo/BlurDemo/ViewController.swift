@@ -15,7 +15,9 @@ class ViewController: UIViewController {
     let stackView = UIStackView()
     let labels = [UILabel(), UILabel(), UILabel()]
     let sliders = [UISlider(), UISlider(), UISlider()]
-    
+    let effectViews = [UIVisualEffectView(effect: nil),
+                       UIVisualEffectView(effect: nil),
+                       UIVisualEffectView(effect: nil)]
     let effectStyles = [(constant:UIBlurEffectStyle.ExtraLight, name:"Extra Light"),
         (constant:UIBlurEffectStyle.Light, name:"Light"),
         (constant:UIBlurEffectStyle.Dark, name:"Dark")]
@@ -40,8 +42,6 @@ class ViewController: UIViewController {
         stackView.alignment = .Fill
         stackView.distribution = .FillEqually
         
-
-        
         for var i=0; i != 3; ++i {
             let innerStackView = UIStackView()
             innerStackView.distribution = .Fill
@@ -53,9 +53,22 @@ class ViewController: UIViewController {
             imageView.contentMode = .ScaleAspectFit
             imageView.translatesAutoresizingMaskIntoConstraints = false
             
-            let effect = UIBlurEffect(style: .Dark)
-            print(UIBlurEffectStyle.Dark.rawValue)
+            let effect = UIBlurEffect(style: effectStyles[i].constant)
+
+            let effectView = effectViews[i]
+            UIView.animateWithDuration(1) {
+                effectView.effect = effect
+            }
+            effectView.layer.speed = 0
             
+            effectView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.addSubview(effectView)
+
+            effectView.leadingAnchor.constraintEqualToAnchor(imageView.leadingAnchor).active = true
+            effectView.trailingAnchor.constraintEqualToAnchor(imageView.trailingAnchor).active = true
+            effectView.topAnchor.constraintEqualToAnchor(imageView.topAnchor).active = true
+            effectView.bottomAnchor.constraintEqualToAnchor(imageView.bottomAnchor).active = true
+
             labels[i].translatesAutoresizingMaskIntoConstraints = false
 
             sliders[i].translatesAutoresizingMaskIntoConstraints = false
@@ -81,8 +94,8 @@ class ViewController: UIViewController {
     }
     
     func sliderDragged(slider:UISlider) {
-        print(slider.value, slider.tag)
         labels[slider.tag].text = makeLabelText(slider.tag, value:slider.value)
+        effectViews[slider.tag].layer.timeOffset = Double(slider.value)
     }
 
     override func didReceiveMemoryWarning() {
