@@ -11,6 +11,7 @@
 		7AE0F2041C020012005FB11B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE0F2031C020012005FB11B /* ViewController.swift */; };
 		7AE0F2091C020012005FB11B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AE0F2081C020012005FB11B /* Assets.xcassets */; };
 		7AE0F20C1C020012005FB11B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AE0F20A1C020012005FB11B /* LaunchScreen.storyboard */; };
+		7AE0F2151C020198005FB11B /* moscow_city.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE0F2141C020198005FB11B /* moscow_city.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		7AE0F2081C020012005FB11B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7AE0F20B1C020012005FB11B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7AE0F20D1C020012005FB11B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AE0F2141C020198005FB11B /* moscow_city.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = moscow_city.jpg; path = img/moscow_city.jpg; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 		7AE0F2001C020012005FB11B /* BlurDemo */ = {
 			isa = PBXGroup;
 			children = (
+				7AE0F2131C02017E005FB11B /* img */,
 				7AE0F2011C020012005FB11B /* AppDelegate.swift */,
 				7AE0F2031C020012005FB11B /* ViewController.swift */,
 				7AE0F2081C020012005FB11B /* Assets.xcassets */,
@@ -59,6 +62,14 @@
 				7AE0F20D1C020012005FB11B /* Info.plist */,
 			);
 			path = BlurDemo;
+			sourceTree = "<group>";
+		};
+		7AE0F2131C02017E005FB11B /* img */ = {
+			isa = PBXGroup;
+			children = (
+				7AE0F2141C020198005FB11B /* moscow_city.jpg */,
+			);
+			name = img;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -121,6 +132,7 @@
 			files = (
 				7AE0F20C1C020012005FB11B /* LaunchScreen.storyboard in Resources */,
 				7AE0F2091C020012005FB11B /* Assets.xcassets in Resources */,
+				7AE0F2151C020198005FB11B /* moscow_city.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +286,7 @@
 				7AE0F2121C020012005FB11B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
