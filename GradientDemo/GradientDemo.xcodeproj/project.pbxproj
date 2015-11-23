@@ -11,6 +11,7 @@
 		7AE0F2251C032EF7005FB11B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE0F2241C032EF7005FB11B /* ViewController.swift */; };
 		7AE0F22A1C032EF7005FB11B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AE0F2291C032EF7005FB11B /* Assets.xcassets */; };
 		7AE0F22D1C032EF7005FB11B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AE0F22B1C032EF7005FB11B /* LaunchScreen.storyboard */; };
+		7AE0F2351C032FEE005FB11B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE0F2341C032FEE005FB11B /* GradientView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		7AE0F2291C032EF7005FB11B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7AE0F22C1C032EF7005FB11B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7AE0F22E1C032EF7005FB11B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AE0F2341C032FEE005FB11B /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,13 +54,22 @@
 		7AE0F2211C032EF7005FB11B /* GradientDemo */ = {
 			isa = PBXGroup;
 			children = (
+				7AE0F2361C03352F005FB11B /* img */,
 				7AE0F2221C032EF7005FB11B /* AppDelegate.swift */,
 				7AE0F2241C032EF7005FB11B /* ViewController.swift */,
+				7AE0F2341C032FEE005FB11B /* GradientView.swift */,
 				7AE0F2291C032EF7005FB11B /* Assets.xcassets */,
 				7AE0F22B1C032EF7005FB11B /* LaunchScreen.storyboard */,
 				7AE0F22E1C032EF7005FB11B /* Info.plist */,
 			);
 			path = GradientDemo;
+			sourceTree = "<group>";
+		};
+		7AE0F2361C03352F005FB11B /* img */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = img;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,6 +144,7 @@
 			files = (
 				7AE0F2251C032EF7005FB11B /* ViewController.swift in Sources */,
 				7AE0F2231C032EF7005FB11B /* AppDelegate.swift in Sources */,
+				7AE0F2351C032FEE005FB11B /* GradientView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +286,7 @@
 				7AE0F2331C032EF7005FB11B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
