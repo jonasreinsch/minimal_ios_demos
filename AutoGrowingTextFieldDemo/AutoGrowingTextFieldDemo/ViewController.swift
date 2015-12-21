@@ -27,7 +27,6 @@ class MyTextField: UITextField {
 }
 
 class ViewController: UIViewController, UITextFieldDelegate {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = backgroundColor
@@ -35,7 +34,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let textField = MyTextField()
         view.addSubview(textField)
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+
+        textField.leadingAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
         textField.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
         textField.backgroundColor = textFieldBackgroundColor
         textField.textColor = textColor
