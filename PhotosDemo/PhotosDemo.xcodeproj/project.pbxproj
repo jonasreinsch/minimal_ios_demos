@@ -8,18 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		7AA60E871C28072300FAC961 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA60E861C28072300FAC961 /* AppDelegate.swift */; };
-		7AA60E891C28072300FAC961 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA60E881C28072300FAC961 /* ViewController.swift */; };
 		7AA60E8E1C28072300FAC961 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AA60E8D1C28072300FAC961 /* Assets.xcassets */; };
 		7AA60E911C28072300FAC961 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AA60E8F1C28072300FAC961 /* LaunchScreen.storyboard */; };
+		7AA60E9B1C2BC95D00FAC961 /* ImageCacheController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA60E981C2BC95D00FAC961 /* ImageCacheController.swift */; };
+		7AA60E9C1C2BC95D00FAC961 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA60E991C2BC95D00FAC961 /* PhotosCollectionViewCell.swift */; };
+		7AA60E9D1C2BC95D00FAC961 /* PhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA60E9A1C2BC95D00FAC961 /* PhotosCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7AA60E831C28072300FAC961 /* PhotosDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotosDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA60E861C28072300FAC961 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7AA60E881C28072300FAC961 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7AA60E8D1C28072300FAC961 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7AA60E901C28072300FAC961 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7AA60E921C28072300FAC961 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AA60E981C2BC95D00FAC961 /* ImageCacheController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCacheController.swift; sourceTree = "<group>"; };
+		7AA60E991C2BC95D00FAC961 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
+		7AA60E9A1C2BC95D00FAC961 /* PhotosCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +57,9 @@
 			isa = PBXGroup;
 			children = (
 				7AA60E861C28072300FAC961 /* AppDelegate.swift */,
-				7AA60E881C28072300FAC961 /* ViewController.swift */,
+				7AA60E981C2BC95D00FAC961 /* ImageCacheController.swift */,
+				7AA60E991C2BC95D00FAC961 /* PhotosCollectionViewCell.swift */,
+				7AA60E9A1C2BC95D00FAC961 /* PhotosCollectionViewController.swift */,
 				7AA60E8D1C28072300FAC961 /* Assets.xcassets */,
 				7AA60E8F1C28072300FAC961 /* LaunchScreen.storyboard */,
 				7AA60E921C28072300FAC961 /* Info.plist */,
@@ -131,8 +137,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AA60E891C28072300FAC961 /* ViewController.swift in Sources */,
+				7AA60E9C1C2BC95D00FAC961 /* PhotosCollectionViewCell.swift in Sources */,
 				7AA60E871C28072300FAC961 /* AppDelegate.swift in Sources */,
+				7AA60E9D1C2BC95D00FAC961 /* PhotosCollectionViewController.swift in Sources */,
+				7AA60E9B1C2BC95D00FAC961 /* ImageCacheController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +282,7 @@
 				7AA60E971C28072300FAC961 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

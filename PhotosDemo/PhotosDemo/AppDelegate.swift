@@ -19,10 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         if let window = window {
-            window.rootViewController = ViewController()
+            let layout = UICollectionViewFlowLayout()
+            layout.itemSize = CGSizeMake(320, 320)
+            
+            window.rootViewController = PhotosCollectionViewController(collectionViewLayout: layout)
             window.makeKeyAndVisible()
             window.backgroundColor = UIColor.whiteColor()
         }
+        
         return true
     }
 
