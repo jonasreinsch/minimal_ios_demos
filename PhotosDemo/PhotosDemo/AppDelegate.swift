@@ -22,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
-        print(imageWidth)
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         guard let window = window else {
             fatalError("window was nil in app delegate")
