@@ -18,11 +18,21 @@ import UIKit
 import Photos
 
 class PhotosCollectionViewCell: UICollectionViewCell {
+    var imageManager: PHImageManager!
+    
+    let photoImageView = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(photoImageView)
-        photoImageView.frame = CGRectMake(0, 0, 320, 320)
+//        photoImageView.frame = CGRectMake(0, 0, 320, 320)
+    
+        photoImageView.translatesAutoresizingMaskIntoConstraints = false
+        photoImageView.leadingAnchor.constraintEqualToAnchor(contentView.leadingAnchor).active = true
+        photoImageView.trailingAnchor.constraintEqualToAnchor(contentView.trailingAnchor).active = true
+        photoImageView.topAnchor.constraintEqualToAnchor(contentView.topAnchor).active = true
+        photoImageView.bottomAnchor.constraintEqualToAnchor(contentView.bottomAnchor).active = true
+        
         photoImageView.contentMode = .ScaleAspectFill
         contentView.backgroundColor = UIColor.redColor()
         contentView.clipsToBounds = true
@@ -31,27 +41,26 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-  
+    
+    override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        let attr = layoutAttributes.copy() as! UICollectionViewLayoutAttributes
+
+        attr.frame.size.height = 320
+        return attr
+    }
+
   var imageAsset: PHAsset? {
     didSet {
-      self.imageManager?.requestImageForAsset(imageAsset!, targetSize: CGSize(width: 320, height: 320), contentMode: .AspectFill, options: nil) { image, info in
-        if let image = image {
-            print("eins")
+      self.imageManager.requestImageForAsset(imageAsset!, targetSize: CGSize(width: 320, height: 320), contentMode: .AspectFill, options: nil) {
+        image, _ in
 
-            self.photoImageView.image = image
-            
-            self.contentView.addSubview(self.photoImageView)
-            print("zwei")
-        } else {
-            print("image was nil")
+        guard let image = image else {
+            fatalError("image was nil")
         }
+        self.photoImageView.image = image
+        self.contentView.addSubview(self.photoImageView)
       }
-        print(contentView.frame)
-//      starButton.alpha = imageAsset!.favorite ? 1.0 : 0.4
     }
   }
-  
-  var imageManager: PHImageManager?
-    
-  let photoImageView = UIImageView()
+
 }

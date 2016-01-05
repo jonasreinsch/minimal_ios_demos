@@ -29,17 +29,23 @@ class PhotosCollectionViewController: UICollectionViewController, PHPhotoLibrary
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    if let collectionView = collectionView {
-        print("hallo")
-        collectionView.registerClass(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-    } else {
-        print("tach")
+    guard let collectionView = collectionView else {
+        fatalError("collectionView was nil")
     }
+    collectionView.registerClass(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+    
+    
+    
     
     images = PHAsset.fetchAssetsWithMediaType(.Image, options: nil)
     imageCacheController = ImageCacheController(imageManager: imageManager, images: images, preheatSize: 1)
     PHPhotoLibrary.sharedPhotoLibrary().registerChangeObserver(self)
   }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+    }
   
   // MARK: UICollectionViewDataSource
   
