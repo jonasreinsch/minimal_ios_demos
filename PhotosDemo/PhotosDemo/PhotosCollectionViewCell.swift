@@ -31,7 +31,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
 
     var imageAsset: PHAsset? {
       didSet {
-        self.imageManager.requestImageForAsset(imageAsset!, targetSize: CGSize(width: imageWidth, height: imageWidth), contentMode: .AspectFill, options: nil) {
+        imageManager.requestImageForAsset(imageAsset!, targetSize: CGSize(width: imageWidth, height: imageWidth), contentMode: .AspectFill, options: nil) {
                 image, _ in
 
                 guard let image = image else {

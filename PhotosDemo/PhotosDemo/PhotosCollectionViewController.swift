@@ -23,7 +23,10 @@ class PhotosCollectionViewController: UICollectionViewController
         collectionView.registerClass(PhotosCollectionViewCell.self,
                                      forCellWithReuseIdentifier: reuseIdentifier)
     
-        images = PHAsset.fetchAssetsWithMediaType(.Image, options: nil)
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+
+        images = PHAsset.fetchAssetsWithMediaType(.Image, options: fetchOptions)
     }
     
     override func viewWillLayoutSubviews() {
@@ -32,11 +35,6 @@ class PhotosCollectionViewController: UICollectionViewController
     }
   
   // MARK: UICollectionViewDataSource
-  
-  override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-    return 1
-  }
-  
   override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return images.count
   }
@@ -45,7 +43,7 @@ class PhotosCollectionViewController: UICollectionViewController
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PhotosCollectionViewCell
     
     cell.imageManager = imageManager
-    cell.imageAsset = images[images.count - (indexPath.item + 1)] as? PHAsset
+    cell.imageAsset = images[indexPath.item] as? PHAsset
     
     return cell
   }
