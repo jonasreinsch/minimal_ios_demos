@@ -21,7 +21,6 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         photoImageView.heightAnchor.constraintEqualToConstant(imageWidth).active = true
         
         photoImageView.contentMode = .ScaleAspectFill
-        contentView.backgroundColor = UIColor.redColor()
         contentView.clipsToBounds = true
     }
 
