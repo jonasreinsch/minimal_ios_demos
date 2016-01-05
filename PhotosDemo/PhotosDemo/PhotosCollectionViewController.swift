@@ -1,10 +1,13 @@
+// as simple as possible, possible improvements
+// - implement PHPhotoLibraryChangeObserver
+// - use PHCachingImageManager and implement image caching
+
 import UIKit
 import Photos
 
 let reuseIdentifier = "__IMAGE_CELL__"
 
-class PhotosCollectionViewController: UICollectionViewController,
-                                      PHPhotoLibraryChangeObserver
+class PhotosCollectionViewController: UICollectionViewController
 {
     var images: PHFetchResult!
 
@@ -21,9 +24,6 @@ class PhotosCollectionViewController: UICollectionViewController,
                                      forCellWithReuseIdentifier: reuseIdentifier)
     
         images = PHAsset.fetchAssetsWithMediaType(.Image, options: nil)
-        PHPhotoLibrary.sharedPhotoLibrary().registerChangeObserver(self)
-        
-        print(images.count)
     }
     
     override func viewWillLayoutSubviews() {
@@ -48,22 +48,5 @@ class PhotosCollectionViewController: UICollectionViewController,
     cell.imageAsset = images[images.count - (indexPath.item + 1)] as? PHAsset
     
     return cell
-  }
-  
-  // MARK: - PHPhotoLibraryChangeObserver
-  func photoLibraryDidChange(changeInstance: PHChange) {
-    let changeDetails = changeInstance.changeDetailsForFetchResult(images)
-    
-    self.images = changeDetails!.fetchResultAfterChanges
-    dispatch_async(dispatch_get_main_queue()) {
-      // Loop through the visible cell indices
-      let indexPaths = self.collectionView?.indexPathsForVisibleItems()
-      for indexPath in indexPaths as [NSIndexPath]! {
-        if changeDetails!.changedIndexes!.containsIndex(indexPath.item) {
-          let cell = self.collectionView?.cellForItemAtIndexPath(indexPath) as! PhotosCollectionViewCell
-          cell.imageAsset = changeDetails!.fetchResultAfterChanges[indexPath.item] as? PHAsset
-        }
-      }
-    }
   }
 }
