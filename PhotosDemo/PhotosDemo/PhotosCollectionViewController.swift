@@ -17,30 +17,34 @@
 import UIKit
 import Photos
 
-let reuseIdentifier = "Cell"
+let reuseIdentifier = "__IMAGE_CELL__"
 
-class PhotosCollectionViewController: UICollectionViewController, PHPhotoLibraryChangeObserver {
-  
-  var images: PHFetchResult!
+class PhotosCollectionViewController: UICollectionViewController,
+                                      PHPhotoLibraryChangeObserver
+{
+    var images: PHFetchResult!
 
-  let imageManager = PHCachingImageManager()
-  var imageCacheController: ImageCacheController!
+    let imageManager = PHCachingImageManager()
+
+    var imageCacheController: ImageCacheController!
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
+    override func viewDidLoad() {
+        super.viewDidLoad()
     
-    guard let collectionView = collectionView else {
-        fatalError("collectionView was nil")
+        guard let collectionView = collectionView else {
+            fatalError("collectionView was nil")
+        }
+        
+        collectionView.registerClass(PhotosCollectionViewCell.self,
+                                     forCellWithReuseIdentifier: reuseIdentifier)
+    
+        images = PHAsset.fetchAssetsWithMediaType(.Image, options: nil)
+        imageCacheController = ImageCacheController(imageManager: imageManager,
+                                                    images: images,
+                                                     preheatSize: 1)
+        
+        PHPhotoLibrary.sharedPhotoLibrary().registerChangeObserver(self)
     }
-    collectionView.registerClass(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-    
-    
-    
-    
-    images = PHAsset.fetchAssetsWithMediaType(.Image, options: nil)
-    imageCacheController = ImageCacheController(imageManager: imageManager, images: images, preheatSize: 1)
-    PHPhotoLibrary.sharedPhotoLibrary().registerChangeObserver(self)
-  }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()

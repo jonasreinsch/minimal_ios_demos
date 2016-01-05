@@ -8,19 +8,36 @@
 
 import UIKit
 
+let screenWidth:CGFloat = UIScreen.mainScreen().bounds.width
+let minimumInterItemSpacing:CGFloat = 10
+let itemsInARow:Int = 3
+
+let spacing:CGFloat = 8
+let spacingInARow:CGFloat = CGFloat(itemsInARow - 1) * spacing
+let imageWidth:CGFloat = (screenWidth / CGFloat(itemsInARow)) - (spacingInARow / CGFloat(itemsInARow))
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
+        print(imageWidth)
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         guard let window = window else {
             fatalError("window was nil in app delegate")
         }
 
         let layout = UICollectionViewFlowLayout()
-        layout.estimatedItemSize = CGSizeMake(320, 320)
+        
+        layout.estimatedItemSize = CGSizeMake(imageWidth, imageWidth)
+        
+        // The InteritemSpacing is determinded entirely
+        // by the (fixed) size of the cells, therefore set it to 0 here
+        // (general assumption here: device orientation is portrait)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = spacing
+        
         let photosCollectionViewController = PhotosCollectionViewController(collectionViewLayout: layout)
 
         window.rootViewController = photosCollectionViewController
