@@ -2,8 +2,6 @@ import UIKit
 import Photos
 
 class PhotosCollectionViewCell: UICollectionViewCell {
-    var imageManager: PHImageManager!
-    
     let photoImageView = UIImageView()
     
     override init(frame: CGRect) {
@@ -30,7 +28,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
 
     var imageAsset: PHAsset? {
         didSet {
-            imageManager.requestImageForAsset(imageAsset!, targetSize: CGSize(width: imageWidth, height: imageWidth), contentMode: .AspectFill, options: nil) {
+            PHImageManager.defaultManager().requestImageForAsset(imageAsset!, targetSize: CGSize(width: imageWidth, height: imageWidth), contentMode: .AspectFill, options: nil) {
                 image, _ in
 
                 guard let image = image else {

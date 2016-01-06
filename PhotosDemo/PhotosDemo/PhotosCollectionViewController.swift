@@ -42,7 +42,6 @@ class PhotosCollectionViewController: UICollectionViewController
   override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PhotosCollectionViewCell
     
-    cell.imageManager = imageManager
     cell.imageAsset = images[indexPath.item] as? PHAsset
     
     return cell
