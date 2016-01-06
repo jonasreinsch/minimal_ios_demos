@@ -15,39 +15,32 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        // layout the image view
+        view.addSubview(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor).active = true
+        imageView.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor).active = true
+        imageView.topAnchor.constraintEqualToAnchor(view.topAnchor).active = true
+        imageView.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
         
+        // layout the button
+        view.addSubview(loadImageButton)
+        loadImageButton.translatesAutoresizingMaskIntoConstraints = false
+        loadImageButton.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor, constant: 0).active = true
+        loadImageButton.rightAnchor.constraintEqualToAnchor(view.rightAnchor, constant: -8).active = true
+
+        // congigure the image picker
         imagePicker.delegate = self
         
-        let views = ["loadImageButton": loadImageButton, "imageView":imageView]
-        
-        
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(imageView)
-        
-        let horizontalConstraintsImageView = NSLayoutConstraint.constraintsWithVisualFormat("H:|[imageView]|", options: [], metrics: nil, views: views)
-        let verticalConstraintsImageView = NSLayoutConstraint.constraintsWithVisualFormat("V:|[imageView]|", options: [], metrics: nil, views: views)
-        
-        view.addConstraints(horizontalConstraintsImageView)
-        view.addConstraints(verticalConstraintsImageView)
-        
+        // configure the image view
         imageView.backgroundColor = UIColor.cyanColor()
-        
-        
-        
-        loadImageButton.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .ScaleAspectFit
+
+        // configure the button
         loadImageButton.setTitle("Load Image", forState: .Normal)
         loadImageButton.setTitleColor(UIColor.orangeColor(), forState: .Normal)
         loadImageButton.addTarget(self, action: "loadImageButtonTapped", forControlEvents: .TouchUpInside)
-        view.addSubview(loadImageButton)
-        view.backgroundColor = UIColor.whiteColor()
-        
-
-        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:[loadImageButton]-|", options: [], metrics: nil, views: views)
-        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[loadImageButton]-|", options: [], metrics: nil, views: views)
-        
-        view.addConstraints(horizontalConstraints)
-        view.addConstraints(verticalConstraints)
     }
     
     func loadImageButtonTapped() {
@@ -55,23 +48,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.sourceType = .PhotoLibrary
         presentViewController(imagePicker, animated: true, completion: nil)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
     
     // UIImagePickerControllerDelegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         
-        imageView.contentMode = .ScaleAspectFit
         imageView.image = image
-        
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 }
 
