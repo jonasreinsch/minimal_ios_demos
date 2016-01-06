@@ -11,7 +11,7 @@ class PhotosCollectionViewController: UICollectionViewController
 {
     var images: PHFetchResult!
 
-    let imageManager = PHImageManager()
+    let imageManager = PHImageManager.defaultManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
