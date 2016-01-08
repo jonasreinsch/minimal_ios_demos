@@ -56,12 +56,9 @@ class ViewController: UIViewController {
         slider.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(slider)
         
-        let widthConstraint = NSLayoutConstraint(item: slider, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 0.8, constant: 0)
-        let bottomConstraint = NSLayoutConstraint(item: slider, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: -30)
-        let centerXConstraint = NSLayoutConstraint(item: slider, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1, constant: 0)
-        view.addConstraint(widthConstraint)
-        view.addConstraint(bottomConstraint)
-        view.addConstraint(centerXConstraint)
+        slider.widthAnchor.constraintEqualToAnchor(view.widthAnchor, multiplier: 0.8).active = true
+        slider.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor, constant: -30).active = true
+        slider.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
         
         slider.addTarget(self, action: "sliderChanged:", forControlEvents: .ValueChanged)
     }
