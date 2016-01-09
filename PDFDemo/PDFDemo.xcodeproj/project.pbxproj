@@ -47,6 +47,7 @@
 		7AEF38FF1C415FBC0064B4A3 /* Reader-Print@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AEF38EF1C415FBC0064B4A3 /* Reader-Print@2x.png */; };
 		7AEF39001C415FBC0064B4A3 /* Reader-Thumbs.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AEF38F01C415FBC0064B4A3 /* Reader-Thumbs.png */; };
 		7AEF39011C415FBC0064B4A3 /* Reader-Thumbs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AEF38F11C415FBC0064B4A3 /* Reader-Thumbs@2x.png */; };
+		7AEF39031C41627C0064B4A3 /* Reader.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7AEF39021C41627C0064B4A3 /* Reader.pdf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,6 +114,7 @@
 		7AEF38EF1C415FBC0064B4A3 /* Reader-Print@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Reader-Print@2x.png"; path = "vfr_reader/img/Reader-Print@2x.png"; sourceTree = SOURCE_ROOT; };
 		7AEF38F01C415FBC0064B4A3 /* Reader-Thumbs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Reader-Thumbs.png"; path = "vfr_reader/img/Reader-Thumbs.png"; sourceTree = SOURCE_ROOT; };
 		7AEF38F11C415FBC0064B4A3 /* Reader-Thumbs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Reader-Thumbs@2x.png"; path = "vfr_reader/img/Reader-Thumbs@2x.png"; sourceTree = SOURCE_ROOT; };
+		7AEF39021C41627C0064B4A3 /* Reader.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Reader.pdf; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 		7AEF388F1C4016140064B4A3 /* PDFDemo */ = {
 			isa = PBXGroup;
 			children = (
+				7AEF39021C41627C0064B4A3 /* Reader.pdf */,
 				7AEF38901C4016140064B4A3 /* AppDelegate.swift */,
 				7AEF38921C4016140064B4A3 /* ViewController.swift */,
 				7AEF38A21C415EA80064B4A3 /* vfr_reader */,
@@ -303,6 +306,7 @@
 				7AEF38F51C415FBC0064B4A3 /* Reader-Button-N@2x.png in Resources */,
 				7AEF38FA1C415FBC0064B4A3 /* Reader-Mark-N.png in Resources */,
 				7AEF38FC1C415FBC0064B4A3 /* Reader-Mark-Y.png in Resources */,
+				7AEF39031C41627C0064B4A3 /* Reader.pdf in Resources */,
 				7AEF38FD1C415FBC0064B4A3 /* Reader-Mark-Y@2x.png in Resources */,
 				7AEF38F61C415FBC0064B4A3 /* Reader-Email.png in Resources */,
 				7AEF389B1C4016140064B4A3 /* LaunchScreen.storyboard in Resources */,

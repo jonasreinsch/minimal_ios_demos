@@ -8,12 +8,37 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, ReaderViewControllerDelegate {
+    
+    var readerViewController:ReaderViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        let path = NSBundle.mainBundle().pathForResource("Reader", ofType: "pdf")
+        
+        if let path = path {
+            let readerDocument = ReaderDocument(filePath: path, password: nil)
+            readerViewController = ReaderViewController(readerDocument: readerDocument)
+            
+            readerViewController.delegate = self
+            
+            readerViewController.modalTransitionStyle = .CrossDissolve
+            readerViewController.modalPresentationStyle = .FullScreen
+            
+            let tgr = UITapGestureRecognizer(target: self, action: "showReaderViewController")
+            view.addGestureRecognizer(tgr)
+        }
     }
+    
+    func dismissReaderViewController(viewController: ReaderViewController!) {
+        readerViewController.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func showReaderViewController() {
+        presentViewController(readerViewController, animated: true, completion: nil)
+    }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
