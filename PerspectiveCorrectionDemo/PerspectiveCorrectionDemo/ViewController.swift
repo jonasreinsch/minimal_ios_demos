@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     func testCrop() -> CGImage {
         
-        let ciInputImage = CIImage(image:UIImage(named:"test_image.jpg")!)
+        let ciInputImage = CIImage(image:UIImage(named:"example_bc")!)
         
         print("source image is \(ciInputImage)") //<CIImage: 0x170212290 extent [0 0 1024 1024]>
         
@@ -43,7 +43,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let image1 = UIImage(named: "test_image.jpg")!
+        let image1 = UIImage(named: "example_bc")!
         let image2 = UIImage(CGImage: testCrop())
 
         let imageView = UIImageView(image: image1)
