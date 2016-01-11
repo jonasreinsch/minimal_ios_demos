@@ -40,13 +40,14 @@ class ViewController: UIViewController {
         return image.imageByApplyingFilter("CIPerspectiveCorrection", withInputParameters: rectCoords)
     }
 
+    var imageView:UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let image1 = UIImage(named: "example_bc")!
         let image2 = UIImage(CGImage: testCrop())
 
-        let imageView = UIImageView(image: image1)
+        imageView = UIImageView(image: image1)
         imageView.contentMode = .ScaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
@@ -69,9 +70,29 @@ class ViewController: UIViewController {
         
         imageView.clipsToBounds = true
         imageView2.clipsToBounds = true
+
+        makeDragViews()
+    }
+    
+    func makeDragViews() {
+        let dragView1 = DragView()
+        let dragView2 = DragView()
+        let dragView3 = DragView()
+        let dragView4 = DragView()
+        imageView.addSubview(dragView1)
+        imageView.addSubview(dragView2)
+        imageView.addSubview(dragView3)
+        imageView.addSubview(dragView4)
+        imageView.userInteractionEnabled = true
         
+        dragView1.setPosition(CGPointMake(70, 50))
+        dragView2.setPosition(CGPointMake(150, 50))
+        dragView3.setPosition(CGPointMake(70, 200))
+        dragView4.setPosition(CGPointMake(140, 190))
         
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
