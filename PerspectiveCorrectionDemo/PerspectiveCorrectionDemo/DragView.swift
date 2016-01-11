@@ -10,12 +10,23 @@ import UIKit
 
 let dragViewSize:CGFloat = 150
 
+
+protocol DragViewDelegate {
+    func didDragTo(p:CGPoint)
+}
+
 class DragView: UIView {
     var centerXConstraint:NSLayoutConstraint!
     var centerYConstraint:NSLayoutConstraint!
     
+    var delegate:DragViewDelegate?
+    
     convenience init() {
         self.init(frame: CGRectZero)
+    }
+    
+    func position() -> CGPoint {
+        return CGPointMake(centerXConstraint.constant, centerYConstraint.constant)
     }
     
     override init(frame: CGRect) {
@@ -53,6 +64,10 @@ class DragView: UIView {
             setPosition(CGPointMake(location.x - initialDelta.x,
                                     location.y - initialDelta.y))
         case .Ended: print("ended")
+            delegate?.didDragTo(CGPointMake(centerXConstraint.constant,
+                                            centerYConstraint.constant
+            ))
+            
         case .Failed: print("failed")
         case .Possible: print("possible")
         }

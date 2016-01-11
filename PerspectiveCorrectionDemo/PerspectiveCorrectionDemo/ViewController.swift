@@ -8,17 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    func testCrop() -> CGImage {
+class ViewController: UIViewController, DragViewDelegate {
+    func testCrop(ptBotLeft:CGPoint, ptBotRight:CGPoint, ptTopRight:CGPoint, ptTopLeft:CGPoint) -> CGImage {
         
         let ciInputImage = CIImage(image:UIImage(named:"example_bc")!)
         
         print("source image is \(ciInputImage)") //<CIImage: 0x170212290 extent [0 0 1024 1024]>
-        
-        let ptBotLeft = CGPointMake(32.0,32.0)
-        let ptBotRight = CGPointMake(992.0,40.0)
-        let ptTopRight = CGPointMake(800.0,700.0)
-        let ptTopLeft = CGPointMake(32.0,700.0)
+
         
         let croppedImage = _getCroppedImageWithImage(ciInputImage!, topLeft: ptTopLeft, topRight: ptTopRight, botLeft: ptBotLeft, botRight: ptBotRight)
         print("cropped image \(croppedImage)") //<CIImage: 0x174204a60 extent [0 0 960 960]>
@@ -41,18 +37,19 @@ class ViewController: UIViewController {
     }
 
     var imageView:UIImageView!
+    var imageView2:UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let image1 = UIImage(named: "example_bc")!
-        let image2 = UIImage(CGImage: testCrop())
+
 
         imageView = UIImageView(image: image1)
         imageView.contentMode = .ScaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
         
-        let imageView2 = UIImageView(image: image2)
+        imageView2 = UIImageView()
         imageView2.contentMode = .ScaleAspectFill
         imageView2.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView2)
@@ -74,11 +71,17 @@ class ViewController: UIViewController {
         makeDragViews()
     }
     
+    let dragView1 = DragView()
+    let dragView2 = DragView()
+    let dragView3 = DragView()
+    let dragView4 = DragView()
+    
     func makeDragViews() {
-        let dragView1 = DragView()
-        let dragView2 = DragView()
-        let dragView3 = DragView()
-        let dragView4 = DragView()
+        dragView1.delegate = self
+        dragView2.delegate = self
+        dragView3.delegate = self
+        dragView4.delegate = self
+        
         imageView.addSubview(dragView1)
         imageView.addSubview(dragView2)
         imageView.addSubview(dragView3)
@@ -90,6 +93,26 @@ class ViewController: UIViewController {
         dragView3.setPosition(CGPointMake(70, 200))
         dragView4.setPosition(CGPointMake(140, 190))
         
+    }
+    
+    func flipY(p:CGPoint) -> CGPoint {
+        return CGPointMake(p.x, imageView.bounds.height - p.y)
+    }
+    
+    func didDragTo(p: CGPoint) {
+        print(p.x, imageView.bounds.height - p.y)
+        
+        
+        
+        
+        
+        let ptBotLeft = flipY(dragView1.position())
+        let ptBotRight = flipY(dragView2.position())
+        let ptTopRight = flipY(dragView3.position())
+        let ptTopLeft = flipY(dragView4.position())
+        
+        let img = testCrop(ptBotLeft, ptBotRight: ptBotRight, ptTopRight: ptTopRight, ptTopLeft: ptTopLeft)
+        imageView2.image = UIImage(CGImage: img)
     }
     
     
