@@ -9,20 +9,42 @@
 import UIKit
 import AVFoundation
 
+let image = UIImage(named:"test_image.jpg")!
+
+// for EXIF orientation, see:
+// https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CGImageProperties_Reference/index.html#//apple_ref/c/data/kCGImagePropertyOrientation
+// for UIImageOrientation, see:
+// https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIImage_Class/#//apple_ref/c/tdef/UIImageOrientation
+func UIImageOrientationToExifOrientation(imageOrientation:UIImageOrientation) -> Int32 {
+    switch imageOrientation {
+    case .Up: return 1
+    case .Down: return 3
+    case .Left: return 8
+    case .Right: return 6
+    case .UpMirrored: return 2
+    case .DownMirrored: return 4
+    case .LeftMirrored: return 5
+    case .RightMirrored: return 7
+    }
+}
+
 class ViewController: UIViewController, DragViewDelegate {
     func testCrop(ptBotLeft:CGPoint, ptBotRight:CGPoint, ptTopRight:CGPoint, ptTopLeft:CGPoint) -> CGImage {
+
+        let img = CIImage(image: image)
+        let exifOrientation = UIImageOrientationToExifOrientation(image.imageOrientation)
         
-        let ciInputImage = CIImage(image:UIImage(named:"test_image.jpg")!)
+        // the CIImage does not use the orientation automatically,
+        // therefore we have to provide it (it needs the EXIF
+        // orientation convention, therefore we need to
+        // convert from UIImageOrientation to EXIF orientation)
+        let ciInputImage = img!.imageByApplyingOrientation(exifOrientation)
         
-        print("source image is \(ciInputImage)")
         
-        let croppedImage = _getCroppedImageWithImage(ciInputImage!, topLeft: ptTopLeft, topRight: ptTopRight, botLeft: ptBotLeft, botRight: ptBotRight)
-        print("cropped image \(croppedImage)")
-        
+        let croppedImage = _getCroppedImageWithImage(ciInputImage, topLeft: ptTopLeft, topRight: ptTopRight, botLeft: ptBotLeft, botRight: ptBotRight)
         let croppedImageCG = CIContext(options: nil).createCGImage(croppedImage, fromRect: croppedImage.extent)
         
         return croppedImageCG
-
     }
     
     private func _getCroppedImageWithImage(image:CIImage, topLeft:CGPoint, topRight:CGPoint, botLeft:CGPoint, botRight:CGPoint) -> CIImage {
@@ -39,10 +61,7 @@ class ViewController: UIViewController, DragViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let image1 = UIImage(named: "test_image.jpg")!
-
-
-        imageView = UIImageView(image: image1)
+        imageView = UIImageView(image: image)
         imageView.contentMode = .ScaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
@@ -52,7 +71,6 @@ class ViewController: UIViewController, DragViewDelegate {
         imageView2.contentMode = .ScaleAspectFit
         imageView2.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView2)
-        
         imageView.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor).active = true
         imageView.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor).active = true
         imageView.topAnchor.constraintEqualToAnchor(view.topAnchor).active = true
@@ -149,9 +167,6 @@ class ViewController: UIViewController, DragViewDelegate {
             bottomRight = points[2]
             bottomLeft = points[3]
         }
-
-        
-        print("\(topLeft), \(bottomLeft), \(bottomRight), \(topRight)")
         
         let ptBotLeft = flipY(bottomLeft)
         let ptBotRight = flipY(bottomRight)
@@ -161,14 +176,10 @@ class ViewController: UIViewController, DragViewDelegate {
         let img = testCrop(ptBotLeft, ptBotRight: ptBotRight, ptTopRight: ptTopRight, ptTopLeft: ptTopLeft)
         imageView2.image = UIImage(CGImage: img)
     }
-    
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 
