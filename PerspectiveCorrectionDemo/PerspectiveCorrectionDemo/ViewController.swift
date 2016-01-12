@@ -48,6 +48,7 @@ class ViewController: UIViewController, DragViewDelegate {
         view.addSubview(imageView)
         
         imageView2 = UIImageView()
+        imageView2.backgroundColor = UIColor.blackColor()
         imageView2.contentMode = .ScaleAspectFit
         imageView2.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView2)

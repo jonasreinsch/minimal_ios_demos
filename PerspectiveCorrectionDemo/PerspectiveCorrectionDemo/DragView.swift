@@ -9,7 +9,8 @@
 import UIKit
 import AVFoundation
 
-let dragViewSize:CGFloat = 150
+let dragViewSize:CGFloat = 70
+let centerViewSize:CGFloat = 3
 
 
 protocol DragViewDelegate {
@@ -42,6 +43,20 @@ class DragView: UIView {
         
         let pgr = UIPanGestureRecognizer(target: self, action: "dragged:")
         addGestureRecognizer(pgr)
+        
+        let centerView = UIView()
+        centerView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(centerView)
+        
+        centerView.backgroundColor = UIColor.blackColor()
+        centerView.alpha = 0.7
+        
+        centerView.widthAnchor.constraintEqualToConstant(centerViewSize).active = true
+        centerView.heightAnchor.constraintEqualToConstant(centerViewSize).active = true
+        centerView.centerXAnchor.constraintEqualToAnchor(centerXAnchor).active = true
+        centerView.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
+        
+        centerView.layer.cornerRadius = centerViewSize / 2
     }
     
    var initialDelta = CGPointMake(-1000, 1000)
@@ -109,15 +124,7 @@ class DragView: UIView {
         if p.y >= operatingRect.origin.y + operatingRect.height {
             centerYConstraint.constant = operatingRect.origin.y + operatingRect.height - 1
         }
-        
-        
-
-
-        
-        
     }
-    
-
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
