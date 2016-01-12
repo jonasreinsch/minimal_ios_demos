@@ -12,7 +12,7 @@ import AVFoundation
 class ViewController: UIViewController, DragViewDelegate {
     func testCrop(ptBotLeft:CGPoint, ptBotRight:CGPoint, ptTopRight:CGPoint, ptTopLeft:CGPoint) -> CGImage {
         
-        let ciInputImage = CIImage(image:UIImage(named:"example_bc")!)
+        let ciInputImage = CIImage(image:UIImage(named:"test_image.jpg")!)
         
         print("source image is \(ciInputImage)")
         
@@ -39,7 +39,7 @@ class ViewController: UIViewController, DragViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let image1 = UIImage(named: "example_bc")!
+        let image1 = UIImage(named: "test_image.jpg")!
 
 
         imageView = UIImageView(image: image1)
@@ -134,6 +134,7 @@ class ViewController: UIViewController, DragViewDelegate {
         
         points.sortInPlace {p1, p2 in p1.y < p2.y} // sort from top to bottom
         
+        print(points)
         if points[0].x < points[1].x {
             topLeft = points[0]
             topRight = points[1]
@@ -149,6 +150,9 @@ class ViewController: UIViewController, DragViewDelegate {
             bottomLeft = points[3]
         }
 
+        
+        print("\(topLeft), \(bottomLeft), \(bottomRight), \(topRight)")
+        
         let ptBotLeft = flipY(bottomLeft)
         let ptBotRight = flipY(bottomRight)
         let ptTopRight = flipY(topRight)
