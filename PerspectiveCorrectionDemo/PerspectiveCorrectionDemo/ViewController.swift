@@ -102,12 +102,56 @@ class ViewController: UIViewController, DragViewDelegate {
         return CGPointMake(scale * (p.x - rectInside.origin.x), scale * (rectInside.height - (p.y - rectInside.origin.y)))
     }
     
+    
+    
     func didDragTo(p: CGPoint) {
         print(p.x, imageView.bounds.height - p.y)
-        let ptBotLeft = flipY(dragView1.position())
-        let ptBotRight = flipY(dragView2.position())
-        let ptTopRight = flipY(dragView3.position())
-        let ptTopLeft = flipY(dragView4.position())
+
+        // add validation, like suggested here:
+        // http://gamedev.stackexchange.com/questions/104262/getting-the-topleft-topright-bottomleft-and-bottomright-points-of-a-shape-in-u
+        
+        /*
+        There are many corner cases:
+        
+        shapes like a <> diamond,
+        shapes where the lines cross (if lines are predetermined);
+        shapes where points coincide.
+        
+        A validation would probably be something like this:
+        
+        reject shape if line segments overlap;
+        reject shape if points are too close or lines are too short;
+        reject shape if angles seem too strange.
+        */
+
+        var topLeft:CGPoint
+        var topRight:CGPoint
+        var bottomLeft:CGPoint
+        var bottomRight:CGPoint
+        
+        var points = [dragView1.position(), dragView2.position(), dragView3.position(), dragView4.position()]
+        
+        points.sortInPlace {p1, p2 in p1.y < p2.y} // sort from top to bottom
+        
+        if points[0].x < points[1].x {
+            topLeft = points[0]
+            topRight = points[1]
+        } else {
+            topRight = points[0]
+            topLeft = points[1]
+        }
+        if points[2].x < points[3].x {
+            bottomLeft = points[2]
+            bottomRight = points[3]
+        } else {
+            bottomRight = points[2]
+            bottomLeft = points[3]
+        }
+
+        let ptBotLeft = flipY(bottomLeft)
+        let ptBotRight = flipY(bottomRight)
+        let ptTopRight = flipY(topRight)
+        let ptTopLeft = flipY(topLeft)
         
         let img = testCrop(ptBotLeft, ptBotRight: ptBotRight, ptTopRight: ptTopRight, ptTopLeft: ptTopLeft)
         imageView2.image = UIImage(CGImage: img)
