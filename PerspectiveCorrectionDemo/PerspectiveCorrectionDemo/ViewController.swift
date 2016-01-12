@@ -7,24 +7,22 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController, DragViewDelegate {
     func testCrop(ptBotLeft:CGPoint, ptBotRight:CGPoint, ptTopRight:CGPoint, ptTopLeft:CGPoint) -> CGImage {
         
         let ciInputImage = CIImage(image:UIImage(named:"example_bc")!)
         
-        print("source image is \(ciInputImage)") //<CIImage: 0x170212290 extent [0 0 1024 1024]>
-
+        print("source image is \(ciInputImage)")
         
         let croppedImage = _getCroppedImageWithImage(ciInputImage!, topLeft: ptTopLeft, topRight: ptTopRight, botLeft: ptBotLeft, botRight: ptBotRight)
-        print("cropped image \(croppedImage)") //<CIImage: 0x174204a60 extent [0 0 960 960]>
+        print("cropped image \(croppedImage)")
         
         let croppedImageCG = CIContext(options: nil).createCGImage(croppedImage, fromRect: croppedImage.extent)
         
         return croppedImageCG
-        
-//        let imageVC = ImageViewController(image: UIImage(CGImage: croppedImageCG))
-//        presentViewController(imageVC, animated: true, completion: nil)
+
     }
     
     private func _getCroppedImageWithImage(image:CIImage, topLeft:CGPoint, topRight:CGPoint, botLeft:CGPoint, botRight:CGPoint) -> CIImage {
@@ -50,7 +48,7 @@ class ViewController: UIViewController, DragViewDelegate {
         view.addSubview(imageView)
         
         imageView2 = UIImageView()
-        imageView2.contentMode = .ScaleAspectFill
+        imageView2.contentMode = .ScaleAspectFit
         imageView2.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView2)
         
@@ -96,16 +94,16 @@ class ViewController: UIViewController, DragViewDelegate {
     }
     
     func flipY(p:CGPoint) -> CGPoint {
-        return CGPointMake(p.x, imageView.bounds.height - p.y)
+        let rectInside = AVMakeRectWithAspectRatioInsideRect(imageView.image!.size, imageView.bounds)
+        
+        let scale = imageView.image!.size.width /
+            AVMakeRectWithAspectRatioInsideRect(imageView.image!.size, imageView.bounds).width
+        
+        return CGPointMake(scale * (p.x - rectInside.origin.x), scale * (rectInside.height - (p.y - rectInside.origin.y)))
     }
     
     func didDragTo(p: CGPoint) {
         print(p.x, imageView.bounds.height - p.y)
-        
-        
-        
-        
-        
         let ptBotLeft = flipY(dragView1.position())
         let ptBotRight = flipY(dragView2.position())
         let ptTopRight = flipY(dragView3.position())

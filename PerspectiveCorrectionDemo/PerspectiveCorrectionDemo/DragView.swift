@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 let dragViewSize:CGFloat = 150
 
@@ -90,17 +91,23 @@ class DragView: UIView {
         centerXConstraint.constant = p.x
         centerYConstraint.constant = p.y
         
-        if p.x < 0 {
-            centerXConstraint.constant = 0
+        guard let vc = delegate as? ViewController else {
+            fatalError("failed cast to ViewController")
         }
-        if p.y < 0 {
-            centerYConstraint.constant = 0
+        
+        let operatingRect = AVMakeRectWithAspectRatioInsideRect(vc.imageView.image!.size, vc.imageView.bounds)
+        
+        if p.x < operatingRect.origin.x {
+            centerXConstraint.constant = operatingRect.origin.x
         }
-        if p.x > superview.bounds.width {
-            centerXConstraint.constant = superview.bounds.width - 1
+        if p.y < operatingRect.origin.y {
+            centerYConstraint.constant = operatingRect.origin.y
         }
-        if p.y > superview.bounds.height {
-            centerYConstraint.constant = superview.bounds.height - 1
+        if p.x >= operatingRect.origin.x + operatingRect.width {
+            centerXConstraint.constant = operatingRect.origin.x + operatingRect.width - 1
+        }
+        if p.y >= operatingRect.origin.y + operatingRect.height {
+            centerYConstraint.constant = operatingRect.origin.y + operatingRect.height - 1
         }
         
         
