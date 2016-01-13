@@ -9,7 +9,7 @@
 import UIKit
 
 let userDefaultsApiKey = "__USER_DEFAULTS_API_KEY__"
-let image = UIImage(named: "example_bc_small")!
+let image = UIImage(named: "test_image_small")!
 
 class ViewController: UIViewController {
     
