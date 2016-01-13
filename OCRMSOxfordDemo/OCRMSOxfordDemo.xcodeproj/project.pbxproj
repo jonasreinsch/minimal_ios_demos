@@ -11,6 +11,7 @@
 		7A6045611C4678810092C880 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6045601C4678810092C880 /* ViewController.swift */; };
 		7A6045661C4678810092C880 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A6045651C4678810092C880 /* Assets.xcassets */; };
 		7A6045691C4678810092C880 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A6045671C4678810092C880 /* LaunchScreen.storyboard */; };
+		7A6045741C46979E0092C880 /* test_image_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A6045731C46979E0092C880 /* test_image_small.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		7A6045651C4678810092C880 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A6045681C4678810092C880 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A60456A1C4678810092C880 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A6045731C46979E0092C880 /* test_image_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = test_image_small.png; path = img/test_image_small.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +38,7 @@
 		7A6045521C4678810092C880 = {
 			isa = PBXGroup;
 			children = (
+				7A6045701C467DB80092C880 /* img */,
 				7A60455D1C4678810092C880 /* OCRMSOxfordDemo */,
 				7A60455C1C4678810092C880 /* Products */,
 			);
@@ -58,6 +61,15 @@
 				7A6045671C4678810092C880 /* LaunchScreen.storyboard */,
 				7A60456A1C4678810092C880 /* Info.plist */,
 			);
+			path = OCRMSOxfordDemo;
+			sourceTree = "<group>";
+		};
+		7A6045701C467DB80092C880 /* img */ = {
+			isa = PBXGroup;
+			children = (
+				7A6045731C46979E0092C880 /* test_image_small.png */,
+			);
+			name = img;
 			path = OCRMSOxfordDemo;
 			sourceTree = "<group>";
 		};
@@ -120,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A6045691C4678810092C880 /* LaunchScreen.storyboard in Resources */,
+				7A6045741C46979E0092C880 /* test_image_small.png in Resources */,
 				7A6045661C4678810092C880 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,6 +285,7 @@
 				7A60456F1C4678810092C880 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
