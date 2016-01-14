@@ -11,6 +11,7 @@ import UIKit
 import MobileCoreServices
 
 let overlay = UIView()
+let frameView = UIView()
 
 class ViewController: UIViewController {
     let imagePicker = UIImagePickerController()
@@ -23,33 +24,44 @@ class ViewController: UIViewController {
         imagePicker.cameraFlashMode = .Auto
 //        imagePicker.showsCameraControls = false
         
-        
-        
         overlay.backgroundColor = UIColor.blueColor()
         overlay.translatesAutoresizingMaskIntoConstraints = false
         overlay.alpha = 0.3
+        
+        overlay.addSubview(frameView)
+        frameView.translatesAutoresizingMaskIntoConstraints = false
+        frameView.backgroundColor = UIColor.redColor()
+        
+        // important: the overlay views should have
+        // userInteractionEnabled == true
+        // otherwise, tap to focus will not work (not sure why, perhaps
+        // a gesture recognizer gets added directly to them?)
 
         imagePicker.cameraOverlayView = overlay
-
-        print(imagePicker.cameraViewTransform)
-        
-        
-
 
         // Not strictly needed, since kUTTypeImage
         // is the default. But better to make this explicit.
         imagePicker.mediaTypes = [kUTTypeImage as String]
-        
+
 //             imagePicker.delegate = self;
-        
         
         let tgr = UITapGestureRecognizer(target: self, action: "didTap")
         view.addGestureRecognizer(tgr)
+        
+    NSNotificationCenter.defaultCenter().addObserverForName("_UIImagePickerControllerUserDidCaptureItem", object:nil, queue:nil) { note in
+            overlay.hidden = true
+        }
+    NSNotificationCenter.defaultCenter().addObserverForName("_UIImagePickerControllerUserDidRejectItem", object:nil, queue:nil) { note in
+            overlay.hidden = false
+        }
+        
     }
     
     func didTap() {
         self.presentViewController(self.imagePicker, animated: true) {
-
+            // important when showing the photo picker a second time,
+            // since on _UIImagePickerControllerUserDidCaptureItem it gets hidden
+            overlay.hidden = false
             let topOffset:CGFloat
             switch UIDevice.currentDevice().userInterfaceIdiom {
             case .Pad:
@@ -68,8 +80,17 @@ class ViewController: UIViewController {
             overlay.leadingAnchor.constraintEqualToAnchor(overlay.superview!.leadingAnchor).active = true
             overlay.trailingAnchor.constraintEqualToAnchor(overlay.superview!.trailingAnchor).active = true
             overlay.topAnchor.constraintEqualToAnchor(overlay.superview!.topAnchor, constant: topOffset).active = true
+
+            frameView.heightAnchor.constraintEqualToAnchor(overlay.heightAnchor, multiplier: 0.8).active = true
+            frameView.widthAnchor.constraintEqualToAnchor(frameView.heightAnchor, multiplier: 1 / 1.545454).active = true
             
-            overlay.userInteractionEnabled = false
+            frameView.centerXAnchor.constraintEqualToAnchor(overlay.centerXAnchor).active = true
+            frameView.centerYAnchor.constraintEqualToAnchor(overlay.centerYAnchor).active = true
+            
+            
+
+            
+            
         }
     }
     
