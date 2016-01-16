@@ -10,10 +10,6 @@ import UIKit
 // MobileCoreServices is needed for kUTTypeImage
 import MobileCoreServices
 
-//
-weak var overlayGlobal:UIView?
-weak var frameViewGlobal:UIView?
-
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     override func viewDidLoad() {
@@ -23,17 +19,40 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         view.addGestureRecognizer(tgr)
     }
     
-    override func updateViewConstraints() {
-        super.updateViewConstraints()
-        
-        print(UIDevice.currentDevice().orientation)
-    }
-    
     var imagePickerObservers:[NSObjectProtocol] = []
     func didTap() {
         let imagePicker = UIImagePickerController()
         let overlay = UIView()
         let frameView = UIView()
+        
+        // The multiplier property is not writable, therefore we prepare
+        // two sets of constraints (one for each orientation) and activate
+        // them accordingly. This is only necessary on iPad, because
+        // the ImagePickerController does not rotate on the iPhone.
+        let frameViewWidthConstraintLandscape = frameView.widthAnchor.constraintEqualToAnchor(overlay.widthAnchor, multiplier: 0.75)
+        let frameViewHeightConstraintLandscape = frameView.heightAnchor.constraintEqualToAnchor(frameView.widthAnchor, multiplier: 1 / 1.545454)
+        let frameViewWidthConstraintPortrait = frameView.widthAnchor.constraintEqualToAnchor(frameView.heightAnchor, multiplier: 1 / 1.545454)
+        let frameViewHeightConstraintPortrait = frameView.heightAnchor.constraintEqualToAnchor(overlay.heightAnchor, multiplier: 0.75)
+        
+        func activateFrameViewConstraintsDependingOnOrientation() {
+            if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+                let scrb = UIScreen.mainScreen().bounds
+                // I did try to use UIDevice.currentDevice().orientation
+                // but it is not always synchronized with the orientation
+                // of the ImagePickerController.
+                if scrb.width > scrb.height { // landscape
+                    frameViewWidthConstraintPortrait.active = false
+                    frameViewHeightConstraintPortrait.active = false
+                    frameViewWidthConstraintLandscape.active = true
+                    frameViewHeightConstraintLandscape.active = true
+                } else { // portrait
+                    frameViewWidthConstraintLandscape.active = false
+                    frameViewHeightConstraintLandscape.active = false
+                    frameViewWidthConstraintPortrait.active = true
+                    frameViewHeightConstraintPortrait.active = true
+                }
+            }
+        }
 
         func onCapture(_:NSNotification) {
             overlay.hidden = true
@@ -41,13 +60,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         func onReject(_:NSNotification) {
             overlay.hidden = false
         }
+
         func onOrientationChange(_:NSNotification) {
-            print("orientation did change: \(UIDevice.currentDevice().orientation.rawValue)")
+            activateFrameViewConstraintsDependingOnOrientation()
         }
+
         let CAPTURE = "_UIImagePickerControllerUserDidCaptureItem"
         let REJECT = "_UIImagePickerControllerUserDidRejectItem"
         let ORIENTATION = "UIDeviceOrientationDidChangeNotification"
         let ctr = NSNotificationCenter.defaultCenter()
+        UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
         imagePickerObservers = [
             ctr.addObserverForName(CAPTURE, object: nil, queue: nil, usingBlock: onCapture),
             ctr.addObserverForName(REJECT, object: nil, queue: nil, usingBlock: onReject),
@@ -90,11 +112,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             case .Pad:
                 topOffset = 0
                 overlay.bottomAnchor.constraintEqualToAnchor(overlay.superview!.bottomAnchor).active = true
-                if UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation) {
-                    frameView.widthAnchor.constraintEqualToAnchor(overlay.widthAnchor, multiplier: 0.8).active = true
-                    frameView.heightAnchor.constraintEqualToAnchor(frameView.widthAnchor, multiplier: 1 / 1.545454).active = true
-                }
-
+                activateFrameViewConstraintsDependingOnOrientation()
             case .Phone:
                 topOffset = 44
                 // height / width = 4 / 3 (aspect ratio)
@@ -148,7 +166,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             self.removeObservers()
         }
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
