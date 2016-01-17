@@ -87,6 +87,14 @@ class ViewController: UIViewController, DragViewDelegate {
         imageView.clipsToBounds = true
         imageView2.clipsToBounds = true
 
+
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+
+
+        
+        
         makeDragViews()
     }
     
@@ -107,10 +115,21 @@ class ViewController: UIViewController, DragViewDelegate {
         imageView.addSubview(dragView4)
         imageView.userInteractionEnabled = true
         
-        dragView1.setPosition(CGPointMake(70, 50))
-        dragView2.setPosition(CGPointMake(150, 50))
-        dragView3.setPosition(CGPointMake(70, 200))
-        dragView4.setPosition(CGPointMake(140, 190))
+        
+        let r = AVMakeRectWithAspectRatioInsideRect(imageView.image!.size, imageView.bounds)
+        let ri = CGRectInset(r, 20, 20)
+        let p1 = CGPointMake(CGRectGetMinX(ri), CGRectGetMinY(ri))
+        let p2 = CGPointMake(CGRectGetMinX(ri), CGRectGetMaxY(ri))
+        let p3 = CGPointMake(CGRectGetMaxX(ri), CGRectGetMaxY(ri))
+        let p4 = CGPointMake(CGRectGetMaxX(ri), CGRectGetMinY(ri))
+
+        
+        dragView1.setPosition(p1)
+        dragView2.setPosition(p2)
+        dragView3.setPosition(p3)
+        dragView4.setPosition(p4)
+        
+        didDragTo(CGPointZero)
     }
     
     func flipY(p:CGPoint) -> CGPoint {
@@ -123,10 +142,12 @@ class ViewController: UIViewController, DragViewDelegate {
     }
     
     
-    
-    func didDragTo(p: CGPoint) {
-        print(p.x, imageView.bounds.height - p.y)
-
+    var calculating = false
+    func didDragTo(_: CGPoint) {
+        if calculating {
+            return
+        }
+        calculating = true
         // add validation, like suggested here:
         // http://gamedev.stackexchange.com/questions/104262/getting-the-topleft-topright-bottomleft-and-bottomright-points-of-a-shape-in-u
         
@@ -153,7 +174,6 @@ class ViewController: UIViewController, DragViewDelegate {
         
         points.sortInPlace {p1, p2 in p1.y < p2.y} // sort from top to bottom
         
-        print(points)
         if points[0].x < points[1].x {
             topLeft = points[0]
             topRight = points[1]

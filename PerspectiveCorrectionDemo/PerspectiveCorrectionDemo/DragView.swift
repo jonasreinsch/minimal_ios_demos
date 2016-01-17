@@ -115,6 +115,8 @@ class DragView: UIView {
         
         let operatingRect = AVMakeRectWithAspectRatioInsideRect(vc.imageView.image!.size, vc.imageView.bounds)
         
+        print(operatingRect)
+        
         if p.x < operatingRect.origin.x {
             centerXConstraint.constant = operatingRect.origin.x
         }
