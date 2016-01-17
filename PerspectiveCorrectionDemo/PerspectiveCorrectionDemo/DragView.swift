@@ -79,6 +79,9 @@ class DragView: UIView {
             let location = pgr.locationInView(superview)
             setPosition(CGPointMake(location.x - initialDelta.x,
                                     location.y - initialDelta.y))
+        delegate?.didDragTo(CGPointMake(centerXConstraint.constant,
+            centerYConstraint.constant
+            ))
         case .Ended: print("ended")
             delegate?.didDragTo(CGPointMake(centerXConstraint.constant,
                                             centerYConstraint.constant

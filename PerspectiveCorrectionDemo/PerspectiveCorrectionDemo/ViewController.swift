@@ -174,8 +174,14 @@ class ViewController: UIViewController, DragViewDelegate {
         let ptTopRight = flipY(topRight)
         let ptTopLeft = flipY(topLeft)
         
-        let img = testCrop(ptBotLeft, ptBotRight: ptBotRight, ptTopRight: ptTopRight, ptTopLeft: ptTopLeft)
-        imageView2.image = UIImage(CGImage: img)
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            let img = self.testCrop(ptBotLeft, ptBotRight: ptBotRight, ptTopRight: ptTopRight, ptTopLeft: ptTopLeft)
+            dispatch_async(dispatch_get_main_queue()) {
+                self.imageView2.image = UIImage(CGImage: img)
+                self.calculating = false
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
