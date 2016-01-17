@@ -10,6 +10,36 @@ import UIKit
 // MobileCoreServices is needed for kUTTypeImage
 import MobileCoreServices
 
+let yellowConstant = UIColor(red: 212/255, green: 169/255, blue: 47/255, alpha: 1)
+
+class FrameView: UIView {
+    let border = CAShapeLayer()
+    
+    convenience init() {
+        self.init(frame: CGRectZero)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        border.strokeColor = yellowConstant.CGColor
+        border.fillColor = nil
+        border.lineDashPattern = [3, 2]
+        border.lineWidth = 3
+        
+        layer.addSublayer(border)
+    }
+    
+    override func layoutSubviews() {
+        border.path = UIBezierPath(rect: bounds).CGPath
+        border.frame = bounds
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     override func viewDidLoad() {
@@ -23,7 +53,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func didTap() {
         let imagePicker = UIImagePickerController()
         let overlay = UIView()
-        let frameView = UIView()
+        let frameView = FrameView()
+        let usageLabel = UILabel()
+        
+        overlay.translatesAutoresizingMaskIntoConstraints = false
+        frameView.translatesAutoresizingMaskIntoConstraints = false
+        usageLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        overlay.addSubview(frameView)
+        overlay.addSubview(usageLabel)
+        
+        usageLabel.backgroundColor = yellowConstant
+        usageLabel.numberOfLines = 0
+        usageLabel.text = "Tap (quickly press on screen) to focus."
+        
+        
+        frameView.centerXAnchor.constraintEqualToAnchor(overlay.centerXAnchor).active = true
+        frameView.centerYAnchor.constraintEqualToAnchor(overlay.centerYAnchor).active = true
+        
+        usageLabel.topAnchor.constraintEqualToAnchor(overlay.topAnchor, constant: 15).active = true
+        usageLabel.centerXAnchor.constraintEqualToAnchor(overlay.centerXAnchor).active = true
         
         // The multiplier property is not writable, therefore we prepare
         // two sets of constraints (one for each orientation) and activate
@@ -89,19 +138,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // is the default. But better to make this explicit.
         imagePicker.mediaTypes = [kUTTypeImage as String]
         
-        overlay.backgroundColor = UIColor.blueColor()
-        overlay.translatesAutoresizingMaskIntoConstraints = false
-        overlay.alpha = 0.3
-        
-        overlay.addSubview(frameView)
-        frameView.translatesAutoresizingMaskIntoConstraints = false
-        frameView.backgroundColor = UIColor.redColor()
-        
         // important: the overlay views should have
         // userInteractionEnabled == true
         // otherwise, tap to focus will not work (not sure why, perhaps
         // a gesture recognizer gets added directly to them?)
-
+        
+        overlay.alpha = 0
         
         self.presentViewController(imagePicker, animated: true) {
             // important when showing the photo picker a second time,
@@ -131,10 +173,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             overlay.trailingAnchor.constraintEqualToAnchor(overlay.superview!.trailingAnchor).active = true
             overlay.topAnchor.constraintEqualToAnchor(overlay.superview!.topAnchor, constant: topOffset).active = true
             
-            frameView.centerXAnchor.constraintEqualToAnchor(overlay.centerXAnchor).active = true
-            frameView.centerYAnchor.constraintEqualToAnchor(overlay.centerYAnchor).active = true
-
-            print(frameView.constraints.count)
+            UIView.animateWithDuration(0.3) {
+                overlay.alpha = 1
+            }
         }
     }
     
