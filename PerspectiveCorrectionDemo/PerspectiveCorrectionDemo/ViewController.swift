@@ -61,27 +61,31 @@ class ViewController: UIViewController, DragViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(stackView)
+        
+        stackView.axis = .Vertical
+        stackView.distribution = .FillEqually
+        stackView.alignment = .Center
+        stackView.topAnchor.constraintEqualToAnchor(view.topAnchor).active = true
+        stackView.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
+        stackView.leftAnchor.constraintEqualToAnchor(view.leftAnchor).active = true
+        stackView.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
+        
         imageView = UIImageView(image: image)
         imageView.contentMode = .ScaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(imageView)
+
         
         imageView2 = UIImageView()
+        imageView2.translatesAutoresizingMaskIntoConstraints = false
         imageView2.backgroundColor = UIColor.blackColor()
         imageView2.contentMode = .ScaleAspectFit
-        imageView2.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(imageView2)
-        imageView.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor).active = true
-        imageView.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor).active = true
-        imageView.topAnchor.constraintEqualToAnchor(view.topAnchor).active = true
+        
+        stackView.addArrangedSubview(imageView)
+        stackView.addArrangedSubview(imageView2)
 
-        imageView2.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor).active = true
-        imageView2.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor).active = true
-        imageView2.topAnchor.constraintEqualToAnchor(imageView.bottomAnchor).active = true
-        imageView2.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
-        
-        imageView2.heightAnchor.constraintEqualToAnchor(imageView.heightAnchor).active = true
-        
         imageView.clipsToBounds = true
         imageView2.clipsToBounds = true
 
