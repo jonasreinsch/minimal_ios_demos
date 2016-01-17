@@ -78,7 +78,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         frameView.centerXAnchor.constraintEqualToAnchor(overlay.centerXAnchor).active = true
         frameView.centerYAnchor.constraintEqualToAnchor(overlay.centerYAnchor).active = true
         
-//        usageLabel.topAnchor.constraintEqualToAnchor(overlay.topAnchor, constant: 15).active = true
         usageLabel.centerYAnchor.constraintEqualToAnchor(guide.centerYAnchor).active = true
         usageLabel.centerXAnchor.constraintEqualToAnchor(overlay.centerXAnchor).active = true
         
