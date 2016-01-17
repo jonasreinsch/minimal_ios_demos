@@ -54,6 +54,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let imagePicker = UIImagePickerController()
         let overlay = UIView()
         let frameView = FrameView()
+
+
         let usageLabel = UILabel()
         
         overlay.translatesAutoresizingMaskIntoConstraints = false
@@ -63,6 +65,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         overlay.addSubview(frameView)
         overlay.addSubview(usageLabel)
         
+        let guide = UILayoutGuide()
+        overlay.addLayoutGuide(guide)
+        guide.topAnchor.constraintEqualToAnchor(overlay.topAnchor).active = true
+        guide.bottomAnchor.constraintEqualToAnchor(frameView.topAnchor).active = true
+        
         usageLabel.backgroundColor = yellowConstant
         usageLabel.numberOfLines = 0
         usageLabel.text = "Tap (quickly press on screen) to focus."
@@ -71,7 +78,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         frameView.centerXAnchor.constraintEqualToAnchor(overlay.centerXAnchor).active = true
         frameView.centerYAnchor.constraintEqualToAnchor(overlay.centerYAnchor).active = true
         
-        usageLabel.topAnchor.constraintEqualToAnchor(overlay.topAnchor, constant: 15).active = true
+//        usageLabel.topAnchor.constraintEqualToAnchor(overlay.topAnchor, constant: 15).active = true
+        usageLabel.centerYAnchor.constraintEqualToAnchor(guide.centerYAnchor).active = true
         usageLabel.centerXAnchor.constraintEqualToAnchor(overlay.centerXAnchor).active = true
         
         // The multiplier property is not writable, therefore we prepare
