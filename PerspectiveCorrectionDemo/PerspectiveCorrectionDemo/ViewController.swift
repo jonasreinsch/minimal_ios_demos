@@ -40,7 +40,6 @@ class ViewController: UIViewController, DragViewDelegate {
         // convert from UIImageOrientation to EXIF orientation)
         let ciInputImage = img!.imageByApplyingOrientation(exifOrientation)
         
-        
         let croppedImage = _getCroppedImageWithImage(ciInputImage, topLeft: ptTopLeft, topRight: ptTopRight, botLeft: ptBotLeft, botRight: ptBotRight)
         let croppedImageCG = CIContext(options: nil).createCGImage(croppedImage, fromRect: croppedImage.extent)
         
@@ -76,15 +75,14 @@ class ViewController: UIViewController, DragViewDelegate {
         imageView = UIImageView(image: image)
         imageView.contentMode = .ScaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
-
         
         imageView2 = UIImageView()
         imageView2.translatesAutoresizingMaskIntoConstraints = false
         imageView2.backgroundColor = UIColor.blackColor()
         imageView2.contentMode = .ScaleAspectFit
         
-        stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(imageView2)
+        stackView.addArrangedSubview(imageView)
 
         imageView.clipsToBounds = true
         imageView2.clipsToBounds = true
@@ -113,7 +111,6 @@ class ViewController: UIViewController, DragViewDelegate {
         dragView2.setPosition(CGPointMake(150, 50))
         dragView3.setPosition(CGPointMake(70, 200))
         dragView4.setPosition(CGPointMake(140, 190))
-        
     }
     
     func flipY(p:CGPoint) -> CGPoint {
