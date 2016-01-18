@@ -11,6 +11,7 @@
 		7A314C3F1C4D1F1400D27E7D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A314C3E1C4D1F1400D27E7D /* ViewController.swift */; };
 		7A314C441C4D1F1400D27E7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A314C431C4D1F1400D27E7D /* Assets.xcassets */; };
 		7A314C471C4D1F1400D27E7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A314C451C4D1F1400D27E7D /* LaunchScreen.storyboard */; };
+		7A314C501C4D225B00D27E7D /* test_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A314C4F1C4D225B00D27E7D /* test_image.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		7A314C431C4D1F1400D27E7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A314C461C4D1F1400D27E7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A314C481C4D1F1400D27E7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A314C4F1C4D225B00D27E7D /* test_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = test_image.jpg; path = img/test_image.jpg; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,11 +56,20 @@
 			children = (
 				7A314C3C1C4D1F1400D27E7D /* AppDelegate.swift */,
 				7A314C3E1C4D1F1400D27E7D /* ViewController.swift */,
+				7A314C4E1C4D224700D27E7D /* img */,
 				7A314C431C4D1F1400D27E7D /* Assets.xcassets */,
 				7A314C451C4D1F1400D27E7D /* LaunchScreen.storyboard */,
 				7A314C481C4D1F1400D27E7D /* Info.plist */,
 			);
 			path = RotateImageAnimated;
+			sourceTree = "<group>";
+		};
+		7A314C4E1C4D224700D27E7D /* img */ = {
+			isa = PBXGroup;
+			children = (
+				7A314C4F1C4D225B00D27E7D /* test_image.jpg */,
+			);
+			name = img;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -121,6 +132,7 @@
 			files = (
 				7A314C471C4D1F1400D27E7D /* LaunchScreen.storyboard in Resources */,
 				7A314C441C4D1F1400D27E7D /* Assets.xcassets in Resources */,
+				7A314C501C4D225B00D27E7D /* test_image.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +286,7 @@
 				7A314C4D1C4D1F1400D27E7D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
