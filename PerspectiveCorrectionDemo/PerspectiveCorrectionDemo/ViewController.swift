@@ -117,7 +117,28 @@ class ViewController: UIViewController, DragViewDelegate {
         
         
         let r = AVMakeRectWithAspectRatioInsideRect(imageView.image!.size, imageView.bounds)
-        let ri = CGRectInset(r, 20, 20)
+        // check if image is portrait or landscape
+        let imageWidth = r.width // imageView.image!.size.width
+        let imageHeight = r.height // imageView.image!.size.height
+        let insetX:CGFloat
+        let insetY:CGFloat
+        if imageWidth > imageHeight {
+            // landscape
+            let frameRectWidth = 0.7 * imageWidth
+            let frameRectHeight = imageWidth / 1.545454
+            insetX = (imageWidth - frameRectWidth) / 2
+            insetY = (imageHeight - frameRectHeight) / 2
+        } else {
+            // portrait
+            let frameRectHeight = 0.7 * imageWidth
+            let frameRectWidth = frameRectHeight / 1.545454
+            insetX = (imageWidth - frameRectWidth) / 2
+            insetY = (imageHeight - frameRectHeight) / 2
+        }
+        print(insetX)
+        print(insetY)
+
+        let ri = CGRectInset(r, insetX, insetY)
         let p1 = CGPointMake(CGRectGetMinX(ri), CGRectGetMinY(ri))
         let p2 = CGPointMake(CGRectGetMinX(ri), CGRectGetMaxY(ri))
         let p3 = CGPointMake(CGRectGetMaxX(ri), CGRectGetMaxY(ri))
