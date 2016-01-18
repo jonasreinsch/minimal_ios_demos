@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 
 let image = UIImage(named:"test_image.jpg")!
+//let image = UIImage(named:"bc")!
 
 // for EXIF orientation, see:
 // https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CGImageProperties_Reference/index.html#//apple_ref/c/data/kCGImagePropertyOrientation
@@ -27,6 +28,69 @@ func UIImageOrientationToExifOrientation(imageOrientation:UIImageOrientation) ->
     case .RightMirrored: return 7
     }
 }
+
+func logicalCoordinatesToImageCoordinates(logicalPoint:CGPoint, image:UIImage) -> CGPoint {
+    assert(0 < image.size.width)
+    assert(0 < image.size.height)
+    assert(0 <= logicalPoint.x)
+    assert(logicalPoint.x <= 1)
+    assert(0 <= logicalPoint.y)
+    assert(logicalPoint.y <= 1)
+    
+    return CGPointMake(image.size.width * logicalPoint.x, image.size.height * logicalPoint.y)
+}
+
+func logicalCoordinatesToImageViewCoordinates(logicalPoint:CGPoint, imageView:UIImageView) -> CGPoint {
+    guard let image = imageView.image else {
+        fatalError("image was nil in logicalCoordinatesToImageViewCoordinates")
+    }
+    
+    assert(0 <= logicalPoint.x)
+    assert(logicalPoint.x <= 1)
+    assert(0 <= logicalPoint.y)
+    assert(logicalPoint.y <= 1)
+    assert(imageView.bounds.width > 0, "width of imageView expected to be greater than 0")
+    assert(imageView.bounds.height > 0, "height of imageView expected to be greater than 0")
+    
+    let r = AVMakeRectWithAspectRatioInsideRect(image.size, imageView.bounds)
+    
+    return CGPointMake(r.origin.x + logicalPoint.x * r.size.width,
+        r.origin.y + logicalPoint.y * r.size.height)
+}
+
+func imageViewCoordinatesToLogicalCoordinates(imageViewPoint:CGPoint, imageView:UIImageView) -> CGPoint {
+    
+    guard let image = imageView.image else {
+        fatalError("image was nil in logicalCoordinatesToImageViewCoordinates")
+    }
+    
+    assert(imageView.bounds.width > 0, "width of imageView expected to be greater than 0")
+    assert(imageView.bounds.height > 0, "height of imageView expected to be greater than 0")
+    assert(0 <= imageViewPoint.x)
+    assert(imageViewPoint.x <= imageView.bounds.width)
+    assert(0 <= imageViewPoint.y)
+    assert(imageViewPoint.y <= imageView.bounds.height)
+    
+    let r = AVMakeRectWithAspectRatioInsideRect(image.size, imageView.bounds)
+    
+    let imageViewPointWithoutOffset = CGPointMake(imageViewPoint.x - r.origin.x,
+        imageViewPoint.y - r.origin.y)
+    return CGPointMake(imageViewPointWithoutOffset.x / imageView.bounds.width,
+        imageViewPointWithoutOffset.y / imageView.bounds.height)
+}
+
+
+func imageCoordinatesToLogicalCoordinates(imagePoint:CGPoint, image:UIImage) -> CGPoint {
+    assert(0 < image.size.width)
+    assert(0 < image.size.height)
+    assert(0 <= imagePoint.x)
+    assert(imagePoint.x <= image.size.width)
+    assert(0 <= imagePoint.y)
+    assert(imagePoint.y <= image.size.height)
+    
+    return CGPointMake(image.size.width/imagePoint.x, image.size.height/imagePoint.y)
+}
+
 
 class ViewController: UIViewController, DragViewDelegate {
     func testCrop(ptBotLeft:CGPoint, ptBotRight:CGPoint, ptTopRight:CGPoint, ptTopLeft:CGPoint) -> CGImage {
@@ -130,7 +194,7 @@ class ViewController: UIViewController, DragViewDelegate {
             insetY = (imageHeight - frameRectHeight) / 2
         } else {
             // portrait
-            let frameRectHeight = 0.7 * imageWidth
+            let frameRectHeight = 0.7 * imageHeight
             let frameRectWidth = frameRectHeight / 1.545454
             insetX = (imageWidth - frameRectWidth) / 2
             insetY = (imageHeight - frameRectHeight) / 2
@@ -161,6 +225,10 @@ class ViewController: UIViewController, DragViewDelegate {
         
         return CGPointMake(scale * (p.x - rectInside.origin.x), scale * (rectInside.height - (p.y - rectInside.origin.y)))
     }
+    
+    
+    
+    
     
     
     var calculating = false
