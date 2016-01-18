@@ -6,6 +6,9 @@
 //  Copyright © 2016 Jonas Reinsch. All rights reserved.
 //
 
+// TODO: use UILayoutGuides to position
+// the drag views and use logical coordinates directly!
+
 import UIKit
 import AVFoundation
 
@@ -294,10 +297,8 @@ class ViewController: UIViewController, DragViewDelegate {
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         
-        coordinator.animateAlongsideTransition({ _ -> Void in
-            
-            
-            }, completion: { (UIViewControllerTransitionCoordinatorContext) -> Void in
+        coordinator.animateAlongsideTransition({_ in})
+            { (UIViewControllerTransitionCoordinatorContext) -> Void in
                 guard let imageView = self.imageView else {
                     print("imageView was nil, returning")
                     return
@@ -312,10 +313,6 @@ class ViewController: UIViewController, DragViewDelegate {
                 let p1 = logicalCoordinatesToImageViewCoordinates(self.dragView1.logicalPosition, imageView: imageView)
                 self.dragView1.centerXConstraint.constant = p1.x
                 self.dragView1.centerYConstraint.constant = p1.y
-                print(self.dragView1.logicalPosition)
-                print(p1)
-                
-
                 let p2 = logicalCoordinatesToImageViewCoordinates(self.dragView2.logicalPosition, imageView: imageView)
                 self.dragView2.centerXConstraint.constant = p2.x
                 self.dragView2.centerYConstraint.constant = p2.y
@@ -326,8 +323,7 @@ class ViewController: UIViewController, DragViewDelegate {
                 let p4 = logicalCoordinatesToImageViewCoordinates(self.dragView4.logicalPosition, imageView: imageView)
                 self.dragView4.centerXConstraint.constant = p4.x
                 self.dragView4.centerYConstraint.constant = p4.y
-
-        })
+        }
         
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
     }
