@@ -10,7 +10,6 @@ import UIKit
 import AVFoundation
 
 let image = UIImage(named:"test_image.jpg")!
-//let image = UIImage(named:"bc")!
 
 // for EXIF orientation, see:
 // https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CGImageProperties_Reference/index.html#//apple_ref/c/data/kCGImagePropertyOrientation
@@ -75,8 +74,8 @@ func imageViewCoordinatesToLogicalCoordinates(imageViewPoint:CGPoint, imageView:
     
     let imageViewPointWithoutOffset = CGPointMake(imageViewPoint.x - r.origin.x,
         imageViewPoint.y - r.origin.y)
-    return CGPointMake(imageViewPointWithoutOffset.x / imageView.bounds.width,
-        imageViewPointWithoutOffset.y / imageView.bounds.height)
+    return CGPointMake(imageViewPointWithoutOffset.x / r.width,
+        imageViewPointWithoutOffset.y / r.height)
 }
 
 
@@ -291,6 +290,46 @@ class ViewController: UIViewController, DragViewDelegate {
                 self.calculating = false
             }
         }
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        
+        coordinator.animateAlongsideTransition({ _ -> Void in
+            
+            
+            }, completion: { (UIViewControllerTransitionCoordinatorContext) -> Void in
+                guard let imageView = self.imageView else {
+                    print("imageView was nil, returning")
+                    return
+                }
+                if self.dragView1.superview == nil {
+                    print("superview of drag view still nil, returning")
+                    return
+                }
+                
+                print("imageView bounds", imageView.bounds)
+                
+                let p1 = logicalCoordinatesToImageViewCoordinates(self.dragView1.logicalPosition, imageView: imageView)
+                self.dragView1.centerXConstraint.constant = p1.x
+                self.dragView1.centerYConstraint.constant = p1.y
+                print(self.dragView1.logicalPosition)
+                print(p1)
+                
+
+                let p2 = logicalCoordinatesToImageViewCoordinates(self.dragView2.logicalPosition, imageView: imageView)
+                self.dragView2.centerXConstraint.constant = p2.x
+                self.dragView2.centerYConstraint.constant = p2.y
+                let p3 = logicalCoordinatesToImageViewCoordinates(self.dragView3.logicalPosition, imageView: imageView)
+                self.dragView3.centerXConstraint.constant = p3.x
+                self.dragView3.centerYConstraint.constant = p3.y
+
+                let p4 = logicalCoordinatesToImageViewCoordinates(self.dragView4.logicalPosition, imageView: imageView)
+                self.dragView4.centerXConstraint.constant = p4.x
+                self.dragView4.centerYConstraint.constant = p4.y
+
+        })
+        
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
     }
 
     override func didReceiveMemoryWarning() {

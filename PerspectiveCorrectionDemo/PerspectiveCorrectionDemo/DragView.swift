@@ -12,7 +12,6 @@ import AVFoundation
 let dragViewSize:CGFloat = 70
 let centerViewSize:CGFloat = 3
 
-
 protocol DragViewDelegate {
     func didDragTo(p:CGPoint)
 }
@@ -20,6 +19,7 @@ protocol DragViewDelegate {
 class DragView: UIView {
     var centerXConstraint:NSLayoutConstraint!
     var centerYConstraint:NSLayoutConstraint!
+    var logicalPosition:CGPoint = CGPointZero
     
     var delegate:DragViewDelegate?
     
@@ -75,7 +75,7 @@ class DragView: UIView {
         case .Began: print("began")
             initialDelta = CGPointMake(pgr.locationInView(superview).x - centerXConstraint.constant, pgr.locationInView(superview).y - centerYConstraint.constant)
         case .Cancelled: print("cancelled")
-        case .Changed: print("changed")
+        case .Changed:
             let location = pgr.locationInView(superview)
             setPosition(CGPointMake(location.x - initialDelta.x,
                                     location.y - initialDelta.y))
@@ -94,41 +94,57 @@ class DragView: UIView {
     
 
     func setPosition(p:CGPoint) {
-        guard let superview = superview else {
-            fatalError("superview was nil")
+        guard let imageView = superview as? UIImageView else {
+            fatalError("superview was nil or not an imageView in setPosition")
         }
+        guard let image = imageView.image else {
+            fatalError("image was nil in setPosition")
+        }
+        
         if centerXConstraint == nil {
-            centerXConstraint = centerXAnchor.constraintEqualToAnchor(superview.leadingAnchor)
+            centerXConstraint = centerXAnchor.constraintEqualToAnchor(imageView.leadingAnchor)
             centerXConstraint.active = true
         }
         if centerYConstraint == nil {
-            centerYConstraint = centerYAnchor.constraintEqualToAnchor(superview.topAnchor)
+            centerYConstraint = centerYAnchor.constraintEqualToAnchor(imageView.topAnchor)
             centerYConstraint.active = true
         }
 
-        centerXConstraint.constant = p.x
-        centerYConstraint.constant = p.y
+
         
-        guard let vc = delegate as? ViewController else {
-            fatalError("failed cast to ViewController")
-        }
+        let operatingRect = AVMakeRectWithAspectRatioInsideRect(image.size, imageView.bounds)
         
-        let operatingRect = AVMakeRectWithAspectRatioInsideRect(vc.imageView.image!.size, vc.imageView.bounds)
         
-        print(operatingRect)
-        
+        let xPositionInImageView:CGFloat
         if p.x < operatingRect.origin.x {
-            centerXConstraint.constant = operatingRect.origin.x
+            xPositionInImageView = operatingRect.origin.x
+        } else if p.x >= operatingRect.origin.x + operatingRect.width {
+            xPositionInImageView = operatingRect.origin.x + operatingRect.width - 1
+        } else {
+            xPositionInImageView = p.x
         }
+        
+        let yPositionInImageView:CGFloat
         if p.y < operatingRect.origin.y {
-            centerYConstraint.constant = operatingRect.origin.y
+            yPositionInImageView = operatingRect.origin.y
+        } else if p.y >= operatingRect.origin.y + operatingRect.height {
+            yPositionInImageView = operatingRect.origin.y + operatingRect.height - 1
+        } else {
+            yPositionInImageView = p.y
         }
-        if p.x >= operatingRect.origin.x + operatingRect.width {
-            centerXConstraint.constant = operatingRect.origin.x + operatingRect.width - 1
-        }
-        if p.y >= operatingRect.origin.y + operatingRect.height {
-            centerYConstraint.constant = operatingRect.origin.y + operatingRect.height - 1
-        }
+        
+        centerXConstraint.constant = xPositionInImageView
+        centerYConstraint.constant = yPositionInImageView
+        
+        logicalPosition = imageViewCoordinatesToLogicalCoordinates(CGPointMake(xPositionInImageView, yPositionInImageView), imageView: imageView)
+        
+        print("---------------")
+        print(centerXConstraint.constant)
+        print(centerYConstraint.constant)
+        print(logicalPosition)
+        print(imageViewCoordinatesToLogicalCoordinates(CGPointMake(xPositionInImageView, yPositionInImageView), imageView: imageView))
+        print("---------------")
+
     }
 
     required init?(coder aDecoder: NSCoder) {
