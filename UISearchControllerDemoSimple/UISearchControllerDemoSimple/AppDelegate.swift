@@ -16,6 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        guard let window = window else {
+            fatalError("window was nil in app delegate")
+        }
+        window.rootViewController = ViewController()
+        window.makeKeyAndVisible()
+        window.backgroundColor = UIColor.whiteColor()
         return true
     }
 
