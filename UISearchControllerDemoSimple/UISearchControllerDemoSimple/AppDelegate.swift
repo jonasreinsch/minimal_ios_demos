@@ -21,7 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let window = window else {
             fatalError("window was nil in app delegate")
         }
-        window.rootViewController = ViewController()
+        
+        let citiesTableViewController = CitiesTableController()
+        let navigationController = UINavigationController(rootViewController: citiesTableViewController)
+        window.rootViewController = navigationController
         window.makeKeyAndVisible()
         window.backgroundColor = UIColor.whiteColor()
         return true
