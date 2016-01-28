@@ -8,18 +8,44 @@
 
 import UIKit
 
+// utility functions
+func searchBarHasText(searchBar:UISearchBar) -> Bool {
+    // initially, the text attribute is nil
+    // we see this as 'no text'
+    guard let text = searchBar.text else {
+        return false
+    }
+    return !text.isEmpty
+}
+
+func searchControllerActiveAndHasText(searchController:UISearchController) -> Bool {
+    return searchController.active && searchBarHasText(searchController.searchBar)
+}
+
 class CitiesTableController: UITableViewController {
+    // (1) gotcha: always use this constructor!
+    // setting searchResultsController to nil means that we use
+    // the same view for presenting the results that we use for searching
+    let searchController = UISearchController(searchResultsController: nil)
+    
+    var filteredCities:[String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        title = "Cities"
         
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: String(UITableViewCell))
+        
+        // (2) implement the UISearchResultsUpdating protocol
+        searchController.searchResultsUpdater = self
+        // (3) in order for us to see something, we have to set the search bar
+        tableView.tableHeaderView = searchController.searchBar
+        // (optional) set this to false, because we present results in the same view
+        searchController.dimsBackgroundDuringPresentation = false
+        // (optional) set the style of the search bar
+        searchController.searchBar.searchBarStyle = .Minimal
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,6 +60,9 @@ class CitiesTableController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchControllerActiveAndHasText(searchController) {
+            return filteredCities.count
+        }
         return cities.count
     }
 
@@ -45,57 +74,25 @@ class CitiesTableController: UITableViewController {
             fatalError("cell.textLabel was nil, this should never happen")
         }
         
-        textLabel.text = cities[row]
-        
-
-        // Configure the cell...
+        if searchControllerActiveAndHasText(searchController) {
+            textLabel.text = filteredCities[row]
+        } else {
+            textLabel.text = cities[row]
+        }
 
         return cell
     }
+}
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+
+extension CitiesTableController:UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else {
+            return
+        }
+        filteredCities = cities.filter() {c in
+            c.lowercaseString.hasPrefix(text.lowercaseString)
+        }
+        tableView.reloadData()
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
