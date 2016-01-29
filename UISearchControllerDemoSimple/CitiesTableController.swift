@@ -8,19 +8,7 @@
 
 import UIKit
 
-// utility functions
-func searchBarHasText(searchBar:UISearchBar) -> Bool {
-    // initially, the text attribute is nil
-    // we see this as 'no text'
-    guard let text = searchBar.text else {
-        return false
-    }
-    return !text.isEmpty
-}
 
-func searchControllerActiveAndHasText(searchController:UISearchController) -> Bool {
-    return searchController.active && searchBarHasText(searchController.searchBar)
-}
 
 class CitiesTableController: UITableViewController {
     // (1) gotcha: always use this constructor!
@@ -37,15 +25,15 @@ class CitiesTableController: UITableViewController {
         
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: String(UITableViewCell))
         
-        // (2) implement the UISearchResultsUpdating protocol
+        // (2) needed in order to react to search text changes
         searchController.searchResultsUpdater = self
         // (3) in order for us to see something, we have to set the search bar
         tableView.tableHeaderView = searchController.searchBar
-        // (optional) set this to false, because we present results in the same view
-        searchController.dimsBackgroundDuringPresentation = false
-        // (optional) set the style of the search bar
+        
+        // just for appearance
         searchController.searchBar.searchBarStyle = .Minimal
-
+        // set to false, because we present results in the same view
+        searchController.dimsBackgroundDuringPresentation = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,7 +48,7 @@ class CitiesTableController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchControllerActiveAndHasText(searchController) {
+        if searchController.active {
             return filteredCities.count
         }
         return cities.count
@@ -74,7 +62,7 @@ class CitiesTableController: UITableViewController {
             fatalError("cell.textLabel was nil, this should never happen")
         }
         
-        if searchControllerActiveAndHasText(searchController) {
+        if searchController.active {
             textLabel.text = filteredCities[row]
         } else {
             textLabel.text = cities[row]
@@ -87,11 +75,14 @@ class CitiesTableController: UITableViewController {
 
 extension CitiesTableController:UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        guard let text = searchController.searchBar.text else {
-            return
-        }
-        filteredCities = cities.filter() {c in
-            c.lowercaseString.hasPrefix(text.lowercaseString)
+        let searchString = searchController.searchBar.text ?? ""
+        
+        if !searchString.isEmpty {
+            filteredCities = cities.filter() {c in
+                c.lowercaseString.hasPrefix(searchString.lowercaseString)
+            }
+        } else {
+            filteredCities = cities
         }
         tableView.reloadData()
     }
