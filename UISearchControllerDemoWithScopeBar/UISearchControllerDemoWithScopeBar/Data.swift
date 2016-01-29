@@ -11,7 +11,9 @@ import Foundation
 // we have cities from 3 continents
 
 enum Continent {
-    case Europe, Asia, America
+    case America, Asia, Europe
+    
+    static let allValues = [America, Asia, Europe]
 }
 
 struct City {

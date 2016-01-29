@@ -8,12 +8,18 @@
 
 import UIKit
 
-func searchControllerActiveAndNotEmpty(searchController:UISearchController) -> Bool {
-    guard let text = searchController.searchBar.text else {
-        return false
+func filterCitiesBySearchString(cities:[City], searchString:String) -> [City] {
+    assert(!searchString.isEmpty)
+    
+    return cities.filter() {c in
+        c.name.lowercaseString.hasPrefix(searchString.lowercaseString)
     }
+}
 
-    return searchController.active && !text.isEmpty
+func filterCitiesByContintent(cities:[City], continent:Continent) -> [City] {
+    return cities.filter() {c in
+        c.continent == continent
+    }
 }
 
 class CitiesTableController: UITableViewController {
@@ -27,9 +33,10 @@ class CitiesTableController: UITableViewController {
         tableView.tableHeaderView = searchController.searchBar
         
         searchController.searchResultsUpdater = self
-        
+
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.searchBarStyle = .Minimal
+        searchController.searchBar.scopeButtonTitles = ["All"] + Continent.allValues.map {String($0)}
+        searchController.searchBar.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,7 +51,7 @@ class CitiesTableController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchControllerActiveAndNotEmpty(searchController) {
+        if searchController.active {
             return filteredCities.count
         } else {
             return cities.count
@@ -66,7 +73,7 @@ class CitiesTableController: UITableViewController {
         let row = indexPath.row
         
         let city:City
-        if searchControllerActiveAndNotEmpty(searchController) {
+        if searchController.active {
             city = filteredCities[row]
         } else {
             city = cities[row]
@@ -76,18 +83,41 @@ class CitiesTableController: UITableViewController {
         
         return defCell
     }
+    
+    func filterCitiesAndReloadData() {
+        // step 1: determine the search string - we treat nil as empty string
+        let searchString = searchController.searchBar.text ?? ""
+        
+        // step 2: filter the cities by the search string
+        //         if search string is empty, we keep all cities
+        let filteredCitiesBySearchString:[City]
+        if !searchString.isEmpty {
+            filteredCitiesBySearchString = filterCitiesBySearchString(cities, searchString: searchString)
+        } else {
+            filteredCitiesBySearchString = cities
+        }
+        
+        // step 3: filter the cities further by continent
+        //         if no continent is selected, we do no further filtering
+        let scopeIndex = searchController.searchBar.selectedScopeButtonIndex
+        if scopeIndex != 0 {
+            let selectedContinent = Continent.allValues[scopeIndex - 1]
+            filteredCities = filterCitiesByContintent(filteredCitiesBySearchString, continent: selectedContinent)
+        } else {
+            filteredCities = filteredCitiesBySearchString
+        }
+        tableView.reloadData()
+    }
 }
 
 extension CitiesTableController: UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        guard let text = searchController.searchBar.text else {
-            return
-        }
-        
-        filteredCities = cities.filter {
-            city in
-            city.name.lowercaseString.hasPrefix(text.lowercaseString)
-        }
-        tableView.reloadData()
+        filterCitiesAndReloadData()
+    }
+}
+
+extension CitiesTableController: UISearchBarDelegate {
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        filterCitiesAndReloadData()
     }
 }
