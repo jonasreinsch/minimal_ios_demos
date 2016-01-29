@@ -10,6 +10,8 @@
 		7ACA3DA61C5B682900140583 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA3DA51C5B682900140583 /* AppDelegate.swift */; };
 		7ACA3DAD1C5B682900140583 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ACA3DAC1C5B682900140583 /* Assets.xcassets */; };
 		7ACA3DB01C5B682900140583 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ACA3DAE1C5B682900140583 /* LaunchScreen.storyboard */; };
+		7ACA3DBA1C5B68CD00140583 /* CitiesTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA3DB91C5B68CD00140583 /* CitiesTableController.swift */; };
+		7ACA3DBC1C5B68EE00140583 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA3DBB1C5B68EE00140583 /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +20,8 @@
 		7ACA3DAC1C5B682900140583 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7ACA3DAF1C5B682900140583 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7ACA3DB11C5B682900140583 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7ACA3DB91C5B68CD00140583 /* CitiesTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitiesTableController.swift; sourceTree = "<group>"; };
+		7ACA3DBB1C5B68EE00140583 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +55,8 @@
 			isa = PBXGroup;
 			children = (
 				7ACA3DA51C5B682900140583 /* AppDelegate.swift */,
+				7ACA3DB91C5B68CD00140583 /* CitiesTableController.swift */,
+				7ACA3DBB1C5B68EE00140583 /* Data.swift */,
 				7ACA3DAC1C5B682900140583 /* Assets.xcassets */,
 				7ACA3DAE1C5B682900140583 /* LaunchScreen.storyboard */,
 				7ACA3DB11C5B682900140583 /* Info.plist */,
@@ -129,6 +135,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7ACA3DA61C5B682900140583 /* AppDelegate.swift in Sources */,
+				7ACA3DBC1C5B68EE00140583 /* Data.swift in Sources */,
+				7ACA3DBA1C5B68CD00140583 /* CitiesTableController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
