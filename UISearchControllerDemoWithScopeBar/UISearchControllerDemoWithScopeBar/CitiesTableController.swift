@@ -23,6 +23,8 @@ func filterCitiesByContintent(cities:[City], continent:Continent) -> [City] {
 }
 
 class CitiesTableController: UITableViewController {
+    // setting searchResultsController to nil has the effect of
+    // using the same view for search results
     let searchController = UISearchController(searchResultsController: nil)
     var filteredCities:[City] = []
     
@@ -30,13 +32,18 @@ class CitiesTableController: UITableViewController {
         super.viewDidLoad()
         title = "Search Cities"
         
+        // needed to make the search bar appear
         tableView.tableHeaderView = searchController.searchBar
-        
+        // needed to be able to react to text changes in the search bar
         searchController.searchResultsUpdater = self
-
-        searchController.dimsBackgroundDuringPresentation = false
+        // needed to make the scope button appear
         searchController.searchBar.scopeButtonTitles = ["All"] + Continent.allValues.map {String($0)}
+        // needed in order to react to changes of the scope button index
         searchController.searchBar.delegate = self
+        
+        // just for appearance (do not dim the view, because we
+        // present search results in the same view)
+        searchController.dimsBackgroundDuringPresentation = false
     }
 
     override func didReceiveMemoryWarning() {
