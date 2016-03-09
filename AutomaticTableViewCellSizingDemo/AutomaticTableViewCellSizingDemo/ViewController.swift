@@ -8,8 +8,6 @@
 
 import UIKit
 
-let MY_CELL = "__my_cell_identifier__"
-
 let texts = [
     "Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, 'and what is the use of a book,' thought Alice 'without pictures or conversations?'",
     "Alice took up the fan",
@@ -27,7 +25,7 @@ class ViewController: UITableViewController {
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        tableView.registerClass(MyCell.self, forCellReuseIdentifier: MY_CELL)
+        tableView.registerClass(MyCell.self, forCellReuseIdentifier: String(MyCell))
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -44,7 +42,9 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(MY_CELL) as! MyCell
+        guard let cell = tableView.dequeueReusableCellWithIdentifier(String(MyCell)) as? MyCell else {
+            fatalError("error dequeing and converting cell")
+        }
         
         cell.configure(texts[indexPath.row])
         
