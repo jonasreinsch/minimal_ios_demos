@@ -31,7 +31,7 @@ class CitiesTableController: UITableViewController {
         tableView.tableHeaderView = searchController.searchBar
         
         // just for appearance
-        searchController.searchBar.searchBarStyle = .Minimal
+//        searchController.searchBar.searchBarStyle = .Minimal
         // set to false, because we present results in the same view
         searchController.dimsBackgroundDuringPresentation = false
     }

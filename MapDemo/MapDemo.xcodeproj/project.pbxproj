@@ -7,23 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7A60455F1C4678810092C880 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A60455E1C4678810092C880 /* AppDelegate.swift */; };
-		7A6045611C4678810092C880 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6045601C4678810092C880 /* ViewController.swift */; };
-		7A6045661C4678810092C880 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A6045651C4678810092C880 /* Assets.xcassets */; };
-		7A6045691C4678810092C880 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A6045671C4678810092C880 /* LaunchScreen.storyboard */; };
+		7AF3E28E1CBBA7EC009A1A89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3E28D1CBBA7EC009A1A89 /* AppDelegate.swift */; };
+		7AF3E2901CBBA7EC009A1A89 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3E28F1CBBA7EC009A1A89 /* ViewController.swift */; };
+		7AF3E2951CBBA7EC009A1A89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AF3E2941CBBA7EC009A1A89 /* Assets.xcassets */; };
+		7AF3E2981CBBA7EC009A1A89 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AF3E2961CBBA7EC009A1A89 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7A60455B1C4678810092C880 /* OCRMSOxfordDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCRMSOxfordDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A60455E1C4678810092C880 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7A6045601C4678810092C880 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		7A6045651C4678810092C880 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		7A6045681C4678810092C880 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		7A60456A1C4678810092C880 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AF3E28A1CBBA7EC009A1A89 /* MapDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AF3E28D1CBBA7EC009A1A89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7AF3E28F1CBBA7EC009A1A89 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7AF3E2941CBBA7EC009A1A89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7AF3E2971CBBA7EC009A1A89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7AF3E2991CBBA7EC009A1A89 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7A6045581C4678810092C880 /* Frameworks */ = {
+		7AF3E2871CBBA7EC009A1A89 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,79 +33,70 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7A6045521C4678810092C880 = {
+		7AF3E2811CBBA7EC009A1A89 = {
 			isa = PBXGroup;
 			children = (
-				7A6045701C467DB80092C880 /* img */,
-				7A60455D1C4678810092C880 /* OCRMSOxfordDemo */,
-				7A60455C1C4678810092C880 /* Products */,
+				7AF3E28C1CBBA7EC009A1A89 /* MapDemo */,
+				7AF3E28B1CBBA7EC009A1A89 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		7A60455C1C4678810092C880 /* Products */ = {
+		7AF3E28B1CBBA7EC009A1A89 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7A60455B1C4678810092C880 /* OCRMSOxfordDemo.app */,
+				7AF3E28A1CBBA7EC009A1A89 /* MapDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7A60455D1C4678810092C880 /* OCRMSOxfordDemo */ = {
+		7AF3E28C1CBBA7EC009A1A89 /* MapDemo */ = {
 			isa = PBXGroup;
 			children = (
-				7A60455E1C4678810092C880 /* AppDelegate.swift */,
-				7A6045601C4678810092C880 /* ViewController.swift */,
-				7A6045651C4678810092C880 /* Assets.xcassets */,
-				7A6045671C4678810092C880 /* LaunchScreen.storyboard */,
-				7A60456A1C4678810092C880 /* Info.plist */,
+				7AF3E28D1CBBA7EC009A1A89 /* AppDelegate.swift */,
+				7AF3E28F1CBBA7EC009A1A89 /* ViewController.swift */,
+				7AF3E2941CBBA7EC009A1A89 /* Assets.xcassets */,
+				7AF3E2961CBBA7EC009A1A89 /* LaunchScreen.storyboard */,
+				7AF3E2991CBBA7EC009A1A89 /* Info.plist */,
 			);
-			path = OCRMSOxfordDemo;
-			sourceTree = "<group>";
-		};
-		7A6045701C467DB80092C880 /* img */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = img;
-			path = OCRMSOxfordDemo;
+			path = MapDemo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7A60455A1C4678810092C880 /* OCRMSOxfordDemo */ = {
+		7AF3E2891CBBA7EC009A1A89 /* MapDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7A60456D1C4678810092C880 /* Build configuration list for PBXNativeTarget "OCRMSOxfordDemo" */;
+			buildConfigurationList = 7AF3E29C1CBBA7EC009A1A89 /* Build configuration list for PBXNativeTarget "MapDemo" */;
 			buildPhases = (
-				7A6045571C4678810092C880 /* Sources */,
-				7A6045581C4678810092C880 /* Frameworks */,
-				7A6045591C4678810092C880 /* Resources */,
+				7AF3E2861CBBA7EC009A1A89 /* Sources */,
+				7AF3E2871CBBA7EC009A1A89 /* Frameworks */,
+				7AF3E2881CBBA7EC009A1A89 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = OCRMSOxfordDemo;
-			productName = OCRMSOxfordDemo;
-			productReference = 7A60455B1C4678810092C880 /* OCRMSOxfordDemo.app */;
+			name = MapDemo;
+			productName = MapDemo;
+			productReference = 7AF3E28A1CBBA7EC009A1A89 /* MapDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		7A6045531C4678810092C880 /* Project object */ = {
+		7AF3E2821CBBA7EC009A1A89 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Jonas Reinsch";
 				TargetAttributes = {
-					7A60455A1C4678810092C880 = {
-						CreatedOnToolsVersion = 7.2;
+					7AF3E2891CBBA7EC009A1A89 = {
+						CreatedOnToolsVersion = 7.3;
 					};
 				};
 			};
-			buildConfigurationList = 7A6045561C4678810092C880 /* Build configuration list for PBXProject "OCRMSOxfordDemo" */;
+			buildConfigurationList = 7AF3E2851CBBA7EC009A1A89 /* Build configuration list for PBXProject "MapDemo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -113,45 +104,45 @@
 				en,
 				Base,
 			);
-			mainGroup = 7A6045521C4678810092C880;
-			productRefGroup = 7A60455C1C4678810092C880 /* Products */;
+			mainGroup = 7AF3E2811CBBA7EC009A1A89;
+			productRefGroup = 7AF3E28B1CBBA7EC009A1A89 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7A60455A1C4678810092C880 /* OCRMSOxfordDemo */,
+				7AF3E2891CBBA7EC009A1A89 /* MapDemo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7A6045591C4678810092C880 /* Resources */ = {
+		7AF3E2881CBBA7EC009A1A89 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A6045691C4678810092C880 /* LaunchScreen.storyboard in Resources */,
-				7A6045661C4678810092C880 /* Assets.xcassets in Resources */,
+				7AF3E2981CBBA7EC009A1A89 /* LaunchScreen.storyboard in Resources */,
+				7AF3E2951CBBA7EC009A1A89 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7A6045571C4678810092C880 /* Sources */ = {
+		7AF3E2861CBBA7EC009A1A89 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A6045611C4678810092C880 /* ViewController.swift in Sources */,
-				7A60455F1C4678810092C880 /* AppDelegate.swift in Sources */,
+				7AF3E2901CBBA7EC009A1A89 /* ViewController.swift in Sources */,
+				7AF3E28E1CBBA7EC009A1A89 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		7A6045671C4678810092C880 /* LaunchScreen.storyboard */ = {
+		7AF3E2961CBBA7EC009A1A89 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7A6045681C4678810092C880 /* Base */,
+				7AF3E2971CBBA7EC009A1A89 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -159,10 +150,11 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		7A60456B1C4678810092C880 /* Debug */ = {
+		7AF3E29A1CBBA7EC009A1A89 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -195,18 +187,20 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		7A60456C1C4678810092C880 /* Release */ = {
+		7AF3E29B1CBBA7EC009A1A89 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -233,31 +227,32 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		7A60456E1C4678810092C880 /* Debug */ = {
+		7AF3E29D1CBBA7EC009A1A89 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = OCRMSOxfordDemo/Info.plist;
+				INFOPLIST_FILE = MapDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jonasreinsch.OCRMSOxfordDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonasreinsch.MapDemo.MapDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		7A60456F1C4678810092C880 /* Release */ = {
+		7AF3E29E1CBBA7EC009A1A89 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = OCRMSOxfordDemo/Info.plist;
+				INFOPLIST_FILE = MapDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jonasreinsch.OCRMSOxfordDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonasreinsch.MapDemo.MapDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -265,25 +260,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7A6045561C4678810092C880 /* Build configuration list for PBXProject "OCRMSOxfordDemo" */ = {
+		7AF3E2851CBBA7EC009A1A89 /* Build configuration list for PBXProject "MapDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7A60456B1C4678810092C880 /* Debug */,
-				7A60456C1C4678810092C880 /* Release */,
+				7AF3E29A1CBBA7EC009A1A89 /* Debug */,
+				7AF3E29B1CBBA7EC009A1A89 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7A60456D1C4678810092C880 /* Build configuration list for PBXNativeTarget "OCRMSOxfordDemo" */ = {
+		7AF3E29C1CBBA7EC009A1A89 /* Build configuration list for PBXNativeTarget "MapDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7A60456E1C4678810092C880 /* Debug */,
-				7A60456F1C4678810092C880 /* Release */,
+				7AF3E29D1CBBA7EC009A1A89 /* Debug */,
+				7AF3E29E1CBBA7EC009A1A89 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 7A6045531C4678810092C880 /* Project object */;
+	rootObject = 7AF3E2821CBBA7EC009A1A89 /* Project object */;
 }

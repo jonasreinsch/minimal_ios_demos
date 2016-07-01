@@ -174,6 +174,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 fatalError("not supposed to run on TV")
             case .Unspecified:
                 fatalError("user interface idiom unspecified")
+            case .CarPlay:
+                fatalError("not supposed to run on car play")
             }
 
             overlay.leadingAnchor.constraintEqualToAnchor(overlay.superview!.leadingAnchor).active = true
