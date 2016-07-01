@@ -8,41 +8,42 @@
 
 import UIKit
 
-private extension Selector {
-    static let sliderChanged = #selector(ViewController.sliderChanged)
-}
-
 class ViewController: UIViewController {
     let circle = CAShapeLayer()
+    let circleView = UIView()
+    let slider = UISlider()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        addSubviews()
         
         // this is just a translation of
         // David Rönnqvist's code here
         // http://stackoverflow.com/a/8021051/1269132
         // to Swift
-        
-        // Set up the shape of the circle
-        let radius:CGFloat = 100
-        
-        // Make a circular shape
 
-        circle.path = UIBezierPath(roundedRect: CGRectMake(0, 0, 2*radius,2*radius), cornerRadius:2*radius).CGPath
-        // Center the shape in self.view
-        circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius,
-            CGRectGetMidY(self.view.frame)-radius)
+        // Make a circular shape
+        circle.path = UIBezierPath(roundedRect: CGRect(x:0, y:0, width:2*Constants.Sizes.radius, height:2*Constants.Sizes.radius), cornerRadius:2*Constants.Sizes.radius).CGPath
         
-        // Configure the apperence of the circle
-        circle.fillColor = UIColor.clearColor().CGColor
-        circle.strokeColor = UIColor.blackColor().CGColor
-        circle.lineWidth = 5
+        // Configure the appearence of the circle
+        circle.fillColor = Constants.Colors.circleFill
+        circle.strokeColor = Constants.Colors.circleStroke
+        circle.lineWidth = Constants.Sizes.circleLineWidth
         
         // Add to parent layer
-        view.layer.addSublayer(circle)
+        circleView.layer.addSublayer(circle)
+        
+        circleView.widthAnchor.constraintEqualToConstant(2*Constants.Sizes.radius).active = true
+        circleView.heightAnchor.constraintEqualToConstant(2*Constants.Sizes.radius).active = true
+        circleView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+        circleView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
+        
+        
+        circleView.backgroundColor = UIColor.orangeColor()
         
         // Configure animation
         let drawAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        drawAnimation.duration = 1.0 // over 2 seconds
+        drawAnimation.duration = 1.0
         drawAnimation.repeatCount = 1
         
         // Animate from no part of the stroke being drawn to the entire stroke being drawn
@@ -56,26 +57,66 @@ class ViewController: UIViewController {
         circle.speed = 0
         
         // see: http://ronnqvi.st/controlling-animation-timing/
-        let slider = UISlider()
-        slider.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(slider)
         
-        slider.widthAnchor.constraintEqualToAnchor(view.widthAnchor, multiplier: 0.8).active = true
-        slider.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor, constant: -30).active = true
-        slider.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        
-        slider.addTarget(self, action: .sliderChanged, forControlEvents: .ValueChanged)
+
+        configureSlider()
     }
     
-    func sliderChanged(slider:UISlider) {
-        circle.timeOffset = Double(slider.value)
+    func addSubviews() {
+        let views = [circleView, slider]
+        
+        views.forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
+
+// everything slider related in this extension
+extension ViewController {
+    func configureSlider() {
+        layoutSlider()
+        customizeSliderAppearance()
+        slider.addTarget(self, action: .sliderChanged, forControlEvents: .ValueChanged)
+    }
+    
+    func layoutSlider() {
+        slider.widthAnchor.constraintEqualToAnchor(view.widthAnchor, multiplier: 0.8).active = true
+        slider.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor, constant: -30).active = true
+        slider.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+    }
+    
+    func sliderChanged(slider:UISlider) {
+        circle.timeOffset = Double(slider.value)
+    }
+    
+    func customizeSliderAppearance() {
+        slider.tintColor = Constants.Colors.fhViolet
+        slider.thumbTintColor = Constants.Colors.fhViolet
+    }
+}
+
+
+private extension Selector {
+    static let sliderChanged = #selector(ViewController.sliderChanged)
+}
+
+struct Constants {
+    struct Sizes {
+        static let radius:CGFloat = 100
+        static let circleLineWidth:CGFloat = 10
+    }
+    struct Colors {
+        static let fhViolet = UIColor(red:168/255, green:4/255, blue:125/255, alpha: 1)
+        static let fhBlue = UIColor(red:33/255, green:94/255, blue:151/255, alpha: 1)
+        static let circleFill = UIColor.clearColor().CGColor
+        static let circleStroke = fhViolet.CGColor
+    }
+}
+
 
