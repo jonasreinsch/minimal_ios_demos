@@ -68,7 +68,6 @@ class ViewController: UIViewController {
     }
     
     func sliderChanged(slider:UISlider) {
-        print(slider.value)
         circle.timeOffset = Double(slider.value)
     }
 
