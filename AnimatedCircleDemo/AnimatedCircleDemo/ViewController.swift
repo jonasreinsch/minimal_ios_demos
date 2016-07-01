@@ -8,6 +8,10 @@
 
 import UIKit
 
+private extension Selector {
+    static let sliderChanged = #selector(ViewController.sliderChanged)
+}
+
 class ViewController: UIViewController {
     let circle = CAShapeLayer()
     override func viewDidLoad() {
@@ -60,7 +64,7 @@ class ViewController: UIViewController {
         slider.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor, constant: -30).active = true
         slider.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
         
-        slider.addTarget(self, action: "sliderChanged:", forControlEvents: .ValueChanged)
+        slider.addTarget(self, action: .sliderChanged, forControlEvents: .ValueChanged)
     }
     
     func sliderChanged(slider:UISlider) {
