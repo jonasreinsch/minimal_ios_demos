@@ -13,33 +13,33 @@ class Draggable: UIView {
     var topConstraint:NSLayoutConstraint!
     
     func addDraggableConstraints() {
-        self.backgroundColor = UIColor.redColor()
+        self.backgroundColor = UIColor.red
         self.translatesAutoresizingMaskIntoConstraints = false
         
-        let widthConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: 200)
-        let heightConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: 100)
-        leftConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: superview!, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 100)
-        topConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: superview!, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: 200)
+        let widthConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1.0, constant: 200)
+        let heightConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1.0, constant: 100)
+        leftConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: superview!, attribute: NSLayoutAttribute.left, multiplier: 1.0, constant: 100)
+        topConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: superview!, attribute: NSLayoutAttribute.top, multiplier: 1.0, constant: 200)
         
         self.addConstraint(widthConstraint)
         self.addConstraint(heightConstraint)
         superview!.addConstraint(leftConstraint)
         superview!.addConstraint(topConstraint)
         
-        self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "dragged:"))
+        self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(Draggable.dragged(_:))))
     }
     
-    var startPos = CGPointMake(0, 0)
-    func dragged(gestureRecognizer:UIPanGestureRecognizer) {
+    var startPos = CGPoint(x: 0, y: 0)
+    func dragged(_ gestureRecognizer:UIPanGestureRecognizer) {
         switch gestureRecognizer.state {
-        case UIGestureRecognizerState.Began:
-            startPos = CGPointMake(self.leftConstraint.constant,
-                                   self.topConstraint.constant)
-        case UIGestureRecognizerState.Changed:
-            let translation:CGPoint = gestureRecognizer.translationInView(superview!)
+        case UIGestureRecognizerState.began:
+            startPos = CGPoint(x: self.leftConstraint.constant,
+                                   y: self.topConstraint.constant)
+        case UIGestureRecognizerState.changed:
+            let translation:CGPoint = gestureRecognizer.translation(in: superview!)
             self.leftConstraint.constant = translation.x + startPos.x
             self.topConstraint.constant = translation.y + startPos.y
-        case UIGestureRecognizerState.Ended:
+        case UIGestureRecognizerState.ended:
             break
         default:
             break
