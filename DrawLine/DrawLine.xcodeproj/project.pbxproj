@@ -161,9 +161,11 @@
 				TargetAttributes = {
 					7ACFA2F31BA6F07900CCF469 = {
 						CreatedOnToolsVersion = 6.4;
+						LastSwiftMigration = 0810;
 					};
 					7ACFA3081BA6F07900CCF469 = {
 						CreatedOnToolsVersion = 6.4;
+						LastSwiftMigration = 0810;
 						TestTargetID = 7ACFA2F31BA6F07900CCF469;
 					};
 				};
@@ -335,6 +337,7 @@
 				INFOPLIST_FILE = DrawLine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -345,6 +348,7 @@
 				INFOPLIST_FILE = DrawLine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -363,6 +367,7 @@
 				INFOPLIST_FILE = DrawLineTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DrawLine.app/DrawLine";
 			};
 			name = Debug;
@@ -378,6 +383,7 @@
 				INFOPLIST_FILE = DrawLineTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DrawLine.app/DrawLine";
 			};
 			name = Release;
@@ -401,6 +407,7 @@
 				7ACFA3151BA6F07900CCF469 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7ACFA3161BA6F07900CCF469 /* Build configuration list for PBXNativeTarget "DrawLineTests" */ = {
 			isa = XCConfigurationList;
@@ -409,6 +416,7 @@
 				7ACFA3181BA6F07900CCF469 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
