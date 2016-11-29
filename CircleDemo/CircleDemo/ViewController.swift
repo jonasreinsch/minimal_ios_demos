@@ -15,13 +15,13 @@ class ViewController: UIViewController {
 
         let circle = CircleView()
         
-        circle.frame = CGRectMake(0, 0, 300, 300)
+        circle.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
         circle.center = view.center
         view.addSubview(circle)
         
-        view.backgroundColor = UIColor.blackColor()
-        print(CGRectGetMidX(circle.frame))
-        print(CGRectGetMidY(circle.frame))
+        view.backgroundColor = UIColor.black
+        print(circle.frame.midX)
+        print(circle.frame.midY)
         
 
         
