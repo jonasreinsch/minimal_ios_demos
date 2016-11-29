@@ -10,8 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
     let circle = CAShapeLayer()
+    let circle2 = CAShapeLayer()
     let circleView = UIView()
     let slider = UISlider()
+    var sliderValueOnTouchDown:Float = -1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,14 +26,21 @@ class ViewController: UIViewController {
 
         // Make a circular shape
         circle.path = UIBezierPath(roundedRect: CGRect(x:0, y:0, width:2*Constants.Sizes.radius, height:2*Constants.Sizes.radius), cornerRadius:2*Constants.Sizes.radius).CGPath
+        circle2.path = circle.path
         
         // Configure the appearence of the circle
         circle.fillColor = Constants.Colors.circleFill
         circle.strokeColor = Constants.Colors.circleStroke
         circle.lineWidth = Constants.Sizes.circleLineWidth
         
+        circle2.fillColor = Constants.Colors.fhBlue.colorWithAlphaComponent(0.5).CGColor
+//        circle2.strokeColor = Constants.Colors.fhBlue.colorWithAlphaComponent(0.5).CGColor
+//        circle2.lineWidth = Constants.Sizes.circleLineWidth
+        
         // Add to parent layer
+        circleView.layer.addSublayer(circle2)
         circleView.layer.addSublayer(circle)
+
         
         circleView.widthAnchor.constraintEqualToConstant(2*Constants.Sizes.radius).active = true
         circleView.heightAnchor.constraintEqualToConstant(2*Constants.Sizes.radius).active = true
@@ -39,7 +48,7 @@ class ViewController: UIViewController {
         circleView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
         
         
-        circleView.backgroundColor = UIColor.orangeColor()
+
         
         // Configure animation
         let drawAnimation = CABasicAnimation(keyPath: "strokeEnd")
@@ -58,8 +67,12 @@ class ViewController: UIViewController {
         
         // see: http://ronnqvi.st/controlling-animation-timing/
         
-
+        
         configureSlider()
+    }
+    
+    func tapped() {
+        print("tapped")
     }
     
     func addSubviews() {
@@ -83,6 +96,23 @@ extension ViewController {
         layoutSlider()
         customizeSliderAppearance()
         slider.addTarget(self, action: .sliderChanged, forControlEvents: .ValueChanged)
+        slider.addTarget(self, action: #selector(ViewController.down), forControlEvents: .TouchDown)
+        slider.addTarget(self, action: #selector(ViewController.up), forControlEvents: .TouchUpInside)
+    }
+    
+    func down() {
+        sliderValueOnTouchDown = slider.value
+    }
+    
+    func up() {
+        if abs(slider.value - sliderValueOnTouchDown) < 0.01 {
+            print("TRIGGER!")
+            circleView.backgroundColor = UIColor.redColor()
+            UIView.animateWithDuration(0.3) {
+                self.circleView.backgroundColor = UIColor.clearColor()
+            }
+        }
+
     }
     
     func layoutSlider() {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7ACBE90F1D3CE73A0085F433 /* SelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACBE90E1D3CE73A0085F433 /* SelectionController.swift */; };
 		7AF3E28E1CBBA7EC009A1A89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3E28D1CBBA7EC009A1A89 /* AppDelegate.swift */; };
 		7AF3E2901CBBA7EC009A1A89 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3E28F1CBBA7EC009A1A89 /* ViewController.swift */; };
 		7AF3E2951CBBA7EC009A1A89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AF3E2941CBBA7EC009A1A89 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7ACBE90E1D3CE73A0085F433 /* SelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionController.swift; sourceTree = "<group>"; };
 		7AF3E28A1CBBA7EC009A1A89 /* MapDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AF3E28D1CBBA7EC009A1A89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AF3E28F1CBBA7EC009A1A89 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				7AF3E28D1CBBA7EC009A1A89 /* AppDelegate.swift */,
+				7ACBE90E1D3CE73A0085F433 /* SelectionController.swift */,
 				7AF3E28F1CBBA7EC009A1A89 /* ViewController.swift */,
 				7AF3E2941CBBA7EC009A1A89 /* Assets.xcassets */,
 				7AF3E2961CBBA7EC009A1A89 /* LaunchScreen.storyboard */,
@@ -133,6 +136,7 @@
 			files = (
 				7AF3E2901CBBA7EC009A1A89 /* ViewController.swift in Sources */,
 				7AF3E28E1CBBA7EC009A1A89 /* AppDelegate.swift in Sources */,
+				7ACBE90F1D3CE73A0085F433 /* SelectionController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +280,7 @@
 				7AF3E29E1CBBA7EC009A1A89 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -21,7 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let window = window else {
             fatalError("window was nil in app delegate")
         }
-        let navController = UINavigationController(rootViewController: ViewController())
+//        let navController = UINavigationController(rootViewController: ViewController())
+        
+        let navController = UINavigationController(rootViewController: SelectionController())
         
         window.rootViewController = navController
         window.makeKeyAndVisible()
