@@ -62,7 +62,7 @@ class Draggable: UIView {
         case UIGestureRecognizerState.changed:
             let translation:CGPoint = gestureRecognizer.translation(in: superview!)
             centerXConstraint.constant = translation.x + startPos.x
-            centerYConstraint.constant = translation.y + startPos.y
+//            centerYConstraint.constant = translation.y + startPos.y
         case UIGestureRecognizerState.ended:
             break
         default:
