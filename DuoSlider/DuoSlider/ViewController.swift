@@ -15,9 +15,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         view.addSubview(d1)
+        view.addSubview(d2)
         d1.addDraggableConstraints()
-
+        d2.addDraggableConstraints()
     }
 
     override func didReceiveMemoryWarning() {
