@@ -16,7 +16,17 @@ class Draggable: UIView {
     let innerColor = UIColor.red
     
     var centerXConstraint:NSLayoutConstraint!
-    var centerYConstraint:NSLayoutConstraint!
+    
+    unowned var duoSlider:DuoSlider
+    
+    init(duoSlider: DuoSlider) {
+        self.duoSlider = duoSlider
+        super.init(frame: CGRect.zero)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     func addDraggableConstraints() {
         backgroundColor = outerColor
@@ -26,12 +36,11 @@ class Draggable: UIView {
         widthAnchor.constraint(equalToConstant: size).isActive = true
         heightAnchor.constraint(equalToConstant: size).isActive = true
         
-        centerXConstraint = centerXAnchor.constraint(equalTo: superview!.centerXAnchor)
-        centerYConstraint = centerYAnchor.constraint(equalTo: superview!.centerYAnchor)
-        
+        centerXConstraint = centerXAnchor.constraint(equalTo: duoSlider.line.leadingAnchor)
         centerXConstraint.isActive = true
-        centerYConstraint.isActive = true
-        
+
+        centerYAnchor.constraint(equalTo: duoSlider.line.centerYAnchor).isActive = true
+
         addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(Draggable.dragged)))
         
         clipsToBounds = true
@@ -46,11 +55,39 @@ class Draggable: UIView {
         innerCircle.layer.cornerRadius = innerSize / 2
         innerCircle.clipsToBounds = true
         
-        innerCircle.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         innerCircle.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        innerCircle.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+
         innerCircle.widthAnchor.constraint(equalToConstant: innerSize).isActive = true
         innerCircle.heightAnchor.constraint(equalToConstant: innerSize).isActive = true
         
+
+    }
+    
+    var relPos:CGFloat = 0 {
+        didSet {
+            print(relPos)
+            if isD1 {
+                let delta = Int(relPos * CGFloat(duoSlider.maxYear - duoSlider.minYear))
+                let newYear = delta + duoSlider.minYear
+                duoSlider.label1.text = "\(newYear)"
+            } else {
+                let delta = Int(relPos * CGFloat(duoSlider.maxYear - duoSlider.minYear))
+                let newYear = delta + duoSlider.minYear
+                duoSlider.label2.text = "\(newYear)"
+            }
+        }
+    }
+
+    func setPosition(_ p:CGFloat) {
+        precondition(0 <= p && p <= 1)
+        
+        centerXConstraint.constant = p * duoSlider.line.bounds.width
+        relPos = p
+    }
+    
+    var isD1: Bool {
+        return duoSlider.d1 == self
     }
     
     var startPos = CGPoint(x: 0, y: 0)
@@ -58,11 +95,33 @@ class Draggable: UIView {
         switch gestureRecognizer.state {
         case UIGestureRecognizerState.began:
             startPos = CGPoint(x: centerXConstraint.constant,
-                               y: centerYConstraint.constant)
+                               y: 0)
         case UIGestureRecognizerState.changed:
             let translation:CGPoint = gestureRecognizer.translation(in: superview!)
-            centerXConstraint.constant = translation.x + startPos.x
-//            centerYConstraint.constant = translation.y + startPos.y
+
+            let candidateX:CGFloat = translation.x + startPos.x
+            let lineLength = duoSlider.line.bounds.width
+            // happy path
+            var candRelPos = candidateX / lineLength
+            // extreme cases, rel pos must be between 0 and 1
+            if candRelPos < 0 {
+                candRelPos = 0
+            } else if candRelPos > 1 {
+                candRelPos = 1
+            }
+            
+            if isD1 {
+                // non-happy path: d1 too much on the right
+                if !(duoSlider.d2.centerXConstraint.constant >= (candidateX + 40)) {
+                    candRelPos = (duoSlider.d2.centerXConstraint.constant - 40) / lineLength
+                }
+            } else {
+                // non-happy path: d2 too much on the left
+                if !(duoSlider.d1.centerXConstraint.constant <= (candidateX - 40)) {
+                    candRelPos = (duoSlider.d1.centerXConstraint.constant + 40) / lineLength
+                }
+            }
+            setPosition(candRelPos)
         case UIGestureRecognizerState.ended:
             break
         default:

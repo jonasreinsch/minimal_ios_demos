@@ -9,17 +9,22 @@
 import UIKit
 
 class ViewController: UIViewController {
-    let d1 = Draggable()
-    let d2 = Draggable()
+    let duoSlider = DuoSlider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
         
-        view.addSubview(d1)
-        view.addSubview(d2)
-        d1.addDraggableConstraints()
-        d2.addDraggableConstraints()
+        view.addSubview(duoSlider.containerView)
+        duoSlider.containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        duoSlider.containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        duoSlider.containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        duoSlider.d1.setPosition(0)
+        duoSlider.d2.setPosition(1)
     }
 
     override func didReceiveMemoryWarning() {
