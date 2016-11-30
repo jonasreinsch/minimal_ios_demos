@@ -9,8 +9,8 @@
 import UIKit
 
 class Draggable: UIView {
-    var leftConstraint:NSLayoutConstraint!
-    var topConstraint:NSLayoutConstraint!
+    var centerXConstraint:NSLayoutConstraint!
+    var centerYConstraint:NSLayoutConstraint!
     
     func addDraggableConstraints() {
         backgroundColor = UIColor.red
@@ -18,25 +18,26 @@ class Draggable: UIView {
         
         widthAnchor.constraint(equalToConstant: 200).isActive = true
         heightAnchor.constraint(equalToConstant: 100).isActive = true
-        leftConstraint = leadingAnchor.constraint(equalTo: superview!.leadingAnchor, constant: 100)
-        topConstraint = topAnchor.constraint(equalTo: superview!.topAnchor, constant: 200)
         
-        leftConstraint.isActive = true
-        topConstraint.isActive = true
+        centerXConstraint = centerXAnchor.constraint(equalTo: superview!.centerXAnchor)
+        centerYConstraint = centerYAnchor.constraint(equalTo: superview!.centerYAnchor)
         
-        self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(Draggable.dragged)))
+        centerXConstraint.isActive = true
+        centerYConstraint.isActive = true
+        
+        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(Draggable.dragged)))
     }
     
     var startPos = CGPoint(x: 0, y: 0)
     func dragged(_ gestureRecognizer:UIPanGestureRecognizer) {
         switch gestureRecognizer.state {
         case UIGestureRecognizerState.began:
-            startPos = CGPoint(x: leftConstraint.constant,
-                                   y: topConstraint.constant)
+            startPos = CGPoint(x: centerXConstraint.constant,
+                               y: centerYConstraint.constant)
         case UIGestureRecognizerState.changed:
             let translation:CGPoint = gestureRecognizer.translation(in: superview!)
-            leftConstraint.constant = translation.x + startPos.x
-            topConstraint.constant = translation.y + startPos.y
+            centerXConstraint.constant = translation.x + startPos.x
+            centerYConstraint.constant = translation.y + startPos.y
         case UIGestureRecognizerState.ended:
             break
         default:
