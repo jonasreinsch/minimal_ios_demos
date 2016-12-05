@@ -96,6 +96,7 @@ class Draggable: UIView {
         case UIGestureRecognizerState.began:
             startPos = CGPoint(x: centerXConstraint.constant,
                                y: 0)
+            superview?.bringSubview(toFront: self)
         case UIGestureRecognizerState.changed:
             let translation:CGPoint = gestureRecognizer.translation(in: superview!)
 
