@@ -68,12 +68,12 @@ class Draggable: UIView {
         didSet {
             print(relPos)
             if isD1 {
-                let delta = Int(relPos * CGFloat(duoSlider.maxYear - duoSlider.minYear))
-                let newYear = delta + duoSlider.minYear
+                let delta = Int(relPos * CGFloat(duoSlider.max - duoSlider.min))
+                let newYear = delta + duoSlider.min
                 duoSlider.label1.text = "\(newYear)"
             } else {
-                let delta = Int(relPos * CGFloat(duoSlider.maxYear - duoSlider.minYear))
-                let newYear = delta + duoSlider.minYear
+                let delta = Int(relPos * CGFloat(duoSlider.max - duoSlider.min))
+                let newYear = delta + duoSlider.min
                 duoSlider.label2.text = "\(newYear)"
             }
         }
@@ -109,18 +109,18 @@ class Draggable: UIView {
             } else if candRelPos > 1 {
                 candRelPos = 1
             }
-            
             if isD1 {
                 // non-happy path: d1 too much on the right
-                if !(duoSlider.d2.centerXConstraint.constant >= (candidateX + 40)) {
-                    candRelPos = (duoSlider.d2.centerXConstraint.constant - 40) / lineLength
+                if !(duoSlider.d2.centerXConstraint.constant > candidateX) {
+                    candRelPos = (duoSlider.d2.centerXConstraint.constant) / lineLength
                 }
             } else {
                 // non-happy path: d2 too much on the left
-                if !(duoSlider.d1.centerXConstraint.constant <= (candidateX - 40)) {
-                    candRelPos = (duoSlider.d1.centerXConstraint.constant + 40) / lineLength
+                if !(duoSlider.d1.centerXConstraint.constant < candidateX) {
+                    candRelPos = (duoSlider.d1.centerXConstraint.constant) / lineLength
                 }
             }
+ 
             setPosition(candRelPos)
         case UIGestureRecognizerState.ended:
             break

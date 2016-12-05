@@ -22,8 +22,8 @@ class DuoSlider {
     let label2 = UILabel()
     let labelWidth:CGFloat = 50
     
-    var minYear = 1600
-    var maxYear = 2006
+    var min = 1000
+    var max = 3000
     
     
     func addLine() {
