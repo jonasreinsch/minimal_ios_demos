@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import AudioToolbox
 
 // code based on http://www.appcoda.com/qr-code-reader-swift/
 // adapted for Swift 2.0
@@ -22,7 +23,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         do {
             let input = try AVCaptureDeviceInput(device: captureDevice)
             let captureMetadataOutput = AVCaptureMetadataOutput()
@@ -30,7 +31,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             captureSession.addInput(input as AVCaptureInput)
             captureSession.addOutput(captureMetadataOutput)
             
-            captureMetadataOutput.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
+            captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             captureMetadataOutput.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
             
             videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
@@ -48,46 +49,49 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(messageLabel)
-        let bottomConstraint = NSLayoutConstraint(item: messageLabel, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: 0)
-        let centerXConstraint = NSLayoutConstraint(item: messageLabel, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1, constant: 0)
+        messageLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        messageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        messageLabel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -30).isActive = true
         
-        view.addConstraint(bottomConstraint)
-        view.addConstraint(centerXConstraint)
-        
-        messageLabel.textColor = UIColor.whiteColor()
+        messageLabel.textColor = UIColor.white
         messageLabel.backgroundColor = UIColor(white: 0.4, alpha: 0.5)
         messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        messageLabel.font = UIFont.systemFont(ofSize: 27)
         
-        messageLabel.text = "--nothing detected yet--"
-
+        messageLabel.text = "-"
+        
         qrCodeFrameView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(qrCodeFrameView)
         
-        qrCodeFrameView.layer.borderColor = UIColor.greenColor().CGColor
+        qrCodeFrameView.layer.borderColor = UIColor.green.cgColor
         qrCodeFrameView.layer.borderWidth = 4
         view.addSubview(qrCodeFrameView)
     }
     
-    func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
         guard let metadataObjects = metadataObjects else {
-            messageLabel.text = "No QR code is detected"
-            qrCodeFrameView.frame = CGRectZero
+            messageLabel.text = "-"
+            qrCodeFrameView.frame = CGRect.zero
             return
         }
         if metadataObjects.count == 0 {
-            messageLabel.text = "No QR code is detected"
-            qrCodeFrameView.frame = CGRectZero
+            messageLabel.text = "-"
+            qrCodeFrameView.frame = CGRect.zero
             return
         }
         
         let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
         
         if metadataObj.type == AVMetadataObjectTypeQRCode {
-            let barCodeObject = videoPreviewLayer?.transformedMetadataObjectForMetadataObject(metadataObj as AVMetadataMachineReadableCodeObject) as! AVMetadataMachineReadableCodeObject
+            let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj as AVMetadataMachineReadableCodeObject) as! AVMetadataMachineReadableCodeObject
             qrCodeFrameView.frame = barCodeObject.bounds;
             
             if metadataObj.stringValue != nil {
-                messageLabel.text = metadataObj.stringValue
+                if (messageLabel.text! != metadataObj.stringValue) {
+                    AudioServicesPlaySystemSound(UInt32(kSystemSoundID_Vibrate))
+                    messageLabel.text = metadataObj.stringValue
+                }
             }
         }
     }
@@ -101,7 +105,5 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 
