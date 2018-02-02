@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     let imagePicker = UIImagePickerController()
     let imageView = UIImageView()
-    let loadImageButton = UIButton(type: .Custom)
+    let loadImageButton = UIButton(type: .custom)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,34 +19,34 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // layout the image view
         view.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor).active = true
-        imageView.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor).active = true
-        imageView.topAnchor.constraintEqualToAnchor(view.topAnchor).active = true
-        imageView.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
+        imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        imageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         // layout the button
         view.addSubview(loadImageButton)
         loadImageButton.translatesAutoresizingMaskIntoConstraints = false
-        loadImageButton.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor, constant: 0).active = true
-        loadImageButton.rightAnchor.constraintEqualToAnchor(view.rightAnchor, constant: -8).active = true
+        loadImageButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        loadImageButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
 
         // congigure the image picker
         imagePicker.delegate = self
         
         // configure the image view
-        imageView.backgroundColor = UIColor.cyanColor()
-        imageView.contentMode = .ScaleAspectFit
+        imageView.backgroundColor = UIColor.cyan
+        imageView.contentMode = .scaleAspectFit
 
         // configure the button
-        loadImageButton.setTitle("Load Image", forState: .Normal)
-        loadImageButton.setTitleColor(UIColor.orangeColor(), forState: .Normal)
-        loadImageButton.addTarget(self, action: "loadImageButtonTapped", forControlEvents: .TouchUpInside)
+        loadImageButton.setTitle("Load Image", for: .normal)
+        loadImageButton.setTitleColor(UIColor.orange, for: .normal)
+        loadImageButton.addTarget(self, action: #selector(ViewController.loadImageButtonTapped), for: .touchUpInside)
     }
     
-    func loadImageButtonTapped() {
+    @objc func loadImageButtonTapped() {
         imagePicker.allowsEditing = false
-        imagePicker.sourceType = .PhotoLibrary
-        presentViewController(imagePicker, animated: true, completion: nil)
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true, completion: nil)
     }
 
     
@@ -54,11 +54,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         
         imageView.image = image
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
