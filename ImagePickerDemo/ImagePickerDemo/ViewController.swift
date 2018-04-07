@@ -10,38 +10,28 @@ import UIKit
 
 class ViewController: UIViewController, ImagePickerPresenter {
     let imageView = UIImageView()
-    let loadImageButton = UIButton(type: .custom)
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // layout the image view
+        // layout image view
         view.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-
-        imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        imageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
-        // layout the button
-        view.addSubview(loadImageButton)
-        loadImageButton.translatesAutoresizingMaskIntoConstraints = false
-        loadImageButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-        loadImageButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
-
-
-        // configure the image view
-        imageView.backgroundColor = UIColor.cyan
+        imageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        // configure image view
+        imageView.backgroundColor = UIColor.darkGray
         imageView.contentMode = .scaleAspectFit
-
-        // configure the button
-        loadImageButton.setTitle("Load Image", for: .normal)
-        loadImageButton.setTitleColor(UIColor.orange, for: .normal)
-        loadImageButton.addTarget(self, action: #selector(ViewController.loadImageButtonTapped), for: .touchUpInside)
+        
+        let imageButton = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(imageButtonTapped))
+        navigationItem.rightBarButtonItem = imageButton
     }
     
-    @objc func loadImageButtonTapped() {
+    @objc func imageButtonTapped() {
         pickImageFromCamera {
             [weak self]
             pickedImage in
