@@ -9,7 +9,6 @@
 import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    let imagePicker = UIImagePickerController()
     let imageView = UIImageView()
     let loadImageButton = UIButton(type: .custom)
     
@@ -30,9 +29,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         loadImageButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         loadImageButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
 
-        // congigure the image picker
-        imagePicker.delegate = self
-        
+
         // configure the image view
         imageView.backgroundColor = UIColor.cyan
         imageView.contentMode = .scaleAspectFit
@@ -44,6 +41,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @objc func loadImageButtonTapped() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .camera
         imagePicker.cameraDevice = .rear
