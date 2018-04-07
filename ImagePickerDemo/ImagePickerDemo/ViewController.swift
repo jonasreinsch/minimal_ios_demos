@@ -45,10 +45,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @objc func loadImageButtonTapped() {
         imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
+        imagePicker.sourceType = .camera
+        imagePicker.cameraDevice = .rear
         present(imagePicker, animated: true, completion: nil)
     }
-
     
     // UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
