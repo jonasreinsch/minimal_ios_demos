@@ -51,9 +51,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     
     // UIImagePickerControllerDelegate
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        print("hello")
         if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.image = chosenImage
         }
