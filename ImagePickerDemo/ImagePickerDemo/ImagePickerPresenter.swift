@@ -30,6 +30,10 @@ class ImagePickerDelegateImp: NSObject, UIImagePickerControllerDelegate, UINavig
     
     static var instance: ImagePickerDelegateImp?
     static func pickImageFromCamera(vc: UIViewController, handlePickedImage: @escaping (UIImage) -> ()) {
+        if !UIImagePickerController.isSourceTypeAvailable(.camera) {
+            return
+        }
+        
         instance = ImagePickerDelegateImp(vc: vc, handlePickedImage: handlePickedImage)
         
         let imagePicker = UIImagePickerController()
