@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, ImagePickerPresenter {
     let imageView = UIImageView()
     let loadImageButton = UIButton(type: .custom)
     
@@ -18,6 +18,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // layout the image view
         view.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+
         imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         imageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -41,25 +42,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @objc func loadImageButtonTapped() {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .camera
-        imagePicker.cameraDevice = .rear
-        present(imagePicker, animated: true, completion: nil)
-    }
-    
-    // UIImagePickerControllerDelegate
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            imageView.image = chosenImage
+        pickImageFromCamera {
+            [weak self]
+            pickedImage in
+            self?.imageView.image = pickedImage
         }
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
     }
 }
+
 
