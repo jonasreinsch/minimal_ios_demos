@@ -9,13 +9,13 @@
 import UIKit
 
 func jsonFromString(s:String) -> [String:String] {
-    guard let data = s.dataUsingEncoding(NSUTF8StringEncoding) else {
+    guard let data = s.data(using: String.Encoding.utf8) else {
         print("problem with the data string: \(s)")
         return [:]
     }
     
     do {
-        let dict = try NSJSONSerialization.JSONObjectWithData(data, options: []) as! [String:String]
+        let dict = try JSONSerialization.jsonObject(with: data, options: []) as! [String:String]
         return dict
     } catch {
         print("json error: \(error)")
@@ -29,16 +29,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // 1. from string literal
-        let dict = jsonFromString("{\"key\": \"value\"}")
-        print(dict["key"])
+        let dict = jsonFromString(s: "{\"key\": \"value\"}")
+        print(dict["key"]!)
         
         // 2. from resource file
-        if let path = NSBundle.mainBundle().pathForResource("test", ofType: "json") {
+        if let path = Bundle.main.path(forResource: "test", ofType: "json") {
             
             do {
-                let jsonString = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+                let jsonString = try String(contentsOfFile: path, encoding: String.Encoding.utf8)
                 
-                print(jsonFromString(jsonString as String)["key"])
+                print(jsonFromString(s: jsonString)["key"] ?? "'key' not found in dictionary")
             }
             catch {
                 print(error)
