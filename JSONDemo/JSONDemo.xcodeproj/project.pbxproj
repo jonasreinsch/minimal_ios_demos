@@ -11,7 +11,7 @@
 		7A4AF0371BC682700097AAFB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4AF0361BC682700097AAFB /* ViewController.swift */; };
 		7A4AF03C1BC682700097AAFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A4AF03B1BC682700097AAFB /* Assets.xcassets */; };
 		7A4AF03F1BC682700097AAFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A4AF03D1BC682700097AAFB /* LaunchScreen.storyboard */; };
-		7AEA76A61BCD02D000D6C3D0 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 7AEA76A51BCD02D000D6C3D0 /* test.json */; settings = {ASSET_TAGS = (); }; };
+		7AEA76A61BCD02D000D6C3D0 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 7AEA76A51BCD02D000D6C3D0 /* test.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +95,7 @@
 				TargetAttributes = {
 					7A4AF0301BC682700097AAFB = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = S595XJ38G3;
 					};
 				};
 			};
@@ -240,10 +241,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = S595XJ38G3;
 				INFOPLIST_FILE = JSONDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jonasreinsch.JSONDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -251,10 +254,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = S595XJ38G3;
 				INFOPLIST_FILE = JSONDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jonasreinsch.JSONDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
