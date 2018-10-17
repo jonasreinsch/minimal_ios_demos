@@ -23,20 +23,20 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        let captureDevice = AVCaptureDevice.default(for: AVMediaType(rawValue: convertFromAVMediaType(AVMediaType.video)))
         do {
-            let input = try AVCaptureDeviceInput(device: captureDevice)
+            let input = try AVCaptureDeviceInput(device: captureDevice!)
             let captureMetadataOutput = AVCaptureMetadataOutput()
             
             captureSession.addInput(input as AVCaptureInput)
             captureSession.addOutput(captureMetadataOutput)
             
             captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            captureMetadataOutput.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
+            captureMetadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
             
             videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
             
-            videoPreviewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+            videoPreviewLayer?.videoGravity = AVLayerVideoGravity(rawValue: convertFromAVLayerVideoGravity(AVLayerVideoGravity.resizeAspectFill))
             
             videoPreviewLayer?.frame = view.layer.bounds
             
@@ -69,12 +69,10 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         view.addSubview(qrCodeFrameView)
     }
     
-    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
-        guard let metadataObjects = metadataObjects else {
-            messageLabel.text = "-"
-            qrCodeFrameView.frame = CGRect.zero
-            return
-        }
+    func metadataOutput(_ captureOutput: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+//            messageLabel.text = "-"
+//            qrCodeFrameView.frame = CGRect.zero
+//            return
         if metadataObjects.count == 0 {
             messageLabel.text = "-"
             qrCodeFrameView.frame = CGRect.zero
@@ -83,7 +81,8 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         
         let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
         
-        if metadataObj.type == AVMetadataObjectTypeQRCode {
+        if metadataObj.type == AVMetadataObject.ObjectType.qr {
+//        if metadataObj.type == convertFromAVMetadataObjectObjectType(AVMetadataObject.ObjectType.qr) {
             let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj as AVMetadataMachineReadableCodeObject) as! AVMetadataMachineReadableCodeObject
             qrCodeFrameView.frame = barCodeObject.bounds;
             
@@ -107,3 +106,18 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     }
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVMediaType(_ input: AVMediaType) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVMetadataObjectObjectType(_ input: AVMetadataObject.ObjectType) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVLayerVideoGravity(_ input: AVLayerVideoGravity) -> String {
+	return input.rawValue
+}
